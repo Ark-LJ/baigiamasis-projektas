@@ -5,7 +5,7 @@ function App() {
     <div className="App">
       <div className="pages">
         <div>TESTING GIT PUSH JONAS</div>
-        <h1>jonas</h1>
+        <p>jonas</p>
       </div>
     </div>
   );
