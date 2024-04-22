@@ -5,7 +5,7 @@ function App() {
     <div className="App">
       <div className="pages">
       <h1>Labas!!!</h1>
-      <p>Veikia?></p>
+      <p>Veikia?</p>
 
       </div>
     </div>
