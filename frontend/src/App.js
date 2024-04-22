@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react'
 import Navbar from './components/Navbar.jsx'
 import loadingImage from './200w.gif'
 import Footer from './components/Footer.jsx';
-// import Login from './pages/Login.js'
-// import Signup from './pages/Signup.js'
+import Login from './pages/Login.js'
+import Signup from './pages/Signup.js'
 // import Main from './pages/Main.jsx'
 
 
