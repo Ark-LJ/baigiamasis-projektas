@@ -1,13 +1,12 @@
 /* Placeholder Styling */
 
 html {
-    background-color: black;
+    background: black;
 }
 
 .container {
     display: flex;
     justify-content: space-between;
-    background-color: darkblue;
 }
 
 nav {
@@ -36,3 +35,19 @@ nav a {
 }
 
 /*  */
+
+.footer-container {
+    display: flex;
+    color: white;
+    justify-content: space-between;
+    margin: 0 40px 0 40px;
+}
+
+.socials {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 2px solid blueviolet;
+    gap: 20px;
+    height: fit-content;
+}
