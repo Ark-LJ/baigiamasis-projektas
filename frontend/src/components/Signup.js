@@ -8,8 +8,8 @@ const Signup = () => {
     const handleLogin = (e) => {
         e.preventDefault()
 
-        const passwordRegex = /^(?=.*[0-9]).{8,}$/
-        if (!passwordRegex.test(password)) {
+        const passwordRequired = /^(?=.*[0-9]).{8,}$/
+        if (!passwordRequired.test(password)) {
             setSignupError('Password must contain at least one number and be at least 8 characters long.')
             return
         }
