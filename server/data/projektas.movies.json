@@ -1,0 +1,101 @@
+[{
+  "_id": {
+    "$oid": "6626c00916835eaa158895d6"
+  },
+  "title": "The Shawshank Redemption",
+  "short_description": "Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption through basic compassion.",
+  "description": "Chronicles the experiences of a formerly successful banker as a prisoner in the gloomy jailhouse of Shawshank after being found guilty of a crime he did not commit. The film portrays the man's unique way of dealing with his new, torturous life; along the way he befriends a number of fellow prisoners, most notably a wise long-term inmate named Red.",
+  "release_year": 1994,
+  "genres": [
+    "Drama"
+  ],
+  "imdb": 9.3,
+  "director": "Frank Darabont",
+  "cast": [
+    "Tim Robbins",
+    "Morgan Freeman",
+    "Bob Gunton"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6626c27216835eaa158895d7"
+  },
+  "title": "The Dark Knight",
+  "short_description": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+  "description": "Set within a year after the events of Batman Begins (2005), Batman, Lieutenant James Gordon, and new District Attorney Harvey Dent successfully begin to round up the criminals that plague Gotham City, until a mysterious and sadistic criminal mastermind known only as \"The Joker\" appears in Gotham, creating a new wave of chaos. Batman's struggle against The Joker becomes deeply personal, forcing him to \"confront everything he believes\" and improve his technology to stop him. A love triangle develops between Bruce Wayne, Dent, and Rachel Dawes.",
+  "release_year": 2008,
+  "genres": [
+    "Drama",
+    "Action",
+    "Crime",
+    "Thriller"
+  ],
+  "imdb": 9,
+  "director": "Christopher Nolan",
+  "cast": [
+    "Christian Bale",
+    "Heath Ledger",
+    "Aaron Eckhart"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6626c27b16835eaa158895d8"
+  },
+  "title": "The Godfather",
+  "short_description": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+  "description": "The Godfather \"Don\" Vito Corleone is the head of the Corleone mafia family in New York. He is at the event of his daughter's wedding. Michael, Vito's youngest son and a decorated WWII Marine is also present at the wedding. Michael seems to be uninterested in being a part of the family business. Vito is a powerful man, and is kind to all those who give him respect but is ruthless against those who do not. But when a powerful and treacherous rival wants to sell drugs and needs the Don's influence for the same, Vito refuses to do it. What follows is a clash between Vito's fading old values and the new ways which may cause Michael to do the thing he was most reluctant in doing and wage a mob war against all the other mafia families which could tear the Corleone family apart.",
+  "release_year": 1972,
+  "genres": [
+    "Drama",
+    "Crime"
+  ],
+  "imdb": 9.2,
+  "director": "Francis Ford Coppola",
+  "cast": [
+    "Marlon Brando",
+    "Al Pacino",
+    "James Caan"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6626c27f16835eaa158895d9"
+  },
+  "title": "The Godfather Part II",
+  "short_description": "The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate.",
+  "description": "The continuing saga of the Corleone crime family tells the story of a young Vito Corleone growing up in Sicily and in 1910s New York; and follows Michael Corleone in the 1950s as he attempts to expand the family business into Las Vegas, Hollywood and Cuba.",
+  "release_year": 1974,
+  "genres": [
+    "Drama",
+    "Crime"
+  ],
+  "imdb": 9,
+  "director": "Francis Ford Coppola",
+  "cast": [
+    "Al Pacino",
+    "Robert De Niro",
+    "Robert Duvall"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6626c28516835eaa158895da"
+  },
+  "title": "12 Angry Men",
+  "short_description": "The jury in a New York City murder trial is frustrated by a single member whose skeptical caution forces them to more carefully consider the evidence before jumping to a hasty verdict.",
+  "description": "The defense and the prosecution have rested, and the jury is filing into the jury room to decide if a young man is guilty or innocent of murdering his father. What begins as an open-and-shut case of murder soon becomes a detective story that presents a succession of clues creating doubt, and a mini-drama of each of the jurors' prejudices and preconceptions about the trial, the accused, AND each other. Based on the play, all of the action takes place on the stage of the jury room.",
+  "release_year": 1957,
+  "genres": [
+    "Drama",
+    "Crime"
+  ],
+  "imdb": 9,
+  "director": "Sidney Lumet",
+  "cast": [
+    "Henry Fonda",
+    "Lee J. Cobb",
+    "Martin Balsam"
+  ]
+}]
