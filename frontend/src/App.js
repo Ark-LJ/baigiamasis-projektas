@@ -4,7 +4,7 @@ function App() {
   return (
     <div className="App">
       <div className="pages">
-        <div>TESTING GIT PUSH</div>
+        <div>TESTING GIT PUSH JONAS</div>
       </div>
     </div>
   );
