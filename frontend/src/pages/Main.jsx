@@ -1,4 +1,5 @@
 // import { useEffect, useState } from "react" fetchint info is DB
+// import { useRent } from './hooks/useRent.js
 
 // Iškomentuoti nes dar nežinom kaip imsim duomenis.
 const Main = () => {
@@ -18,9 +19,30 @@ const Main = () => {
     //     fetchMovies()
     //   }
     // }, [])
+    
+    // Very wishy washy post'as. Ir reik pridėt authentication dėl šito
+    // const handleAddToRent = async () => {
+    //     const filmas = {title, id, banner_path}
+    //     const response = await fetch('/api/rent', {
+    //         method: 'POST',
+    //         body: JSON.stringify(filmas),
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'Authorization': `Bearer ${user.token}`
+    //         }
+    //     })
+    //     const json = await response.json()
+    //     if(!response.ok) {
+    //         setError(json.error)
+    //     }
+    //     if(response.ok) {
+    //         console.log('Filmas išnuomuotas', json)
+    //         dispatch({type: 'CREATE_RENT', payload: json})
+    //     }
+    // }
     return (
         <div className="main">
-            {/* <h1>Main Site</h1>
+            {/* <h1>MOVIES THAT IS YOUR RIDE OR DIE.</h1>
             <div className="search-container">
                 <input type="text" className='search-input' placeholder='Movie'/>
             </div>

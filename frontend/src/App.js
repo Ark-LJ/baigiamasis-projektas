@@ -2,8 +2,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Navbar from './components/Navbar.jsx'
 import loadingImage from './200w.gif'
-// import Login from './pages/Login.js'
-// import Signup from './pages/Signup.js'
+import Footer from './components/Footer.jsx';
+import Login from './pages/Login.js'
+import Signup from './pages/Signup.js'
 // import Main from './pages/Main.jsx'
 
 
@@ -12,7 +13,7 @@ function App() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setLoading(false);
-    }, 1000)
+    }, 1500)
   
     return () => clearTimeout(timeout);
   }, [])
@@ -43,6 +44,7 @@ function App() {
             </Routes> */}
           </div>
         </BrowserRouter>
+          <Footer />
         </div>
       </div>
     </>
