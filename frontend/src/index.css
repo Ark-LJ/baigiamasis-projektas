@@ -1,0 +1,53 @@
+/* Placeholder Styling */
+
+html {
+    background: black;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+nav {
+    align-self: center;
+    margin-right: 10px;
+}
+
+nav a {
+    margin-left: 10px;
+    background-color: aqua;
+    padding: 10px;
+    clip-path: polygon(50% 0%, 100% 0, 100% 62%, 76% 100%, 0 100%, 0 0);
+}
+
+/* Loading Cage styling. blur-content class styling is for blurring out the page while the page is "loading" */
+
+.loading-gif {
+    position: absolute;
+    z-index: 99;
+    left: 50%; 
+    bottom: 50%;
+}
+
+.blur-content {
+    filter: blur(1.5rem);
+}
+
+/*  */
+
+.footer-container {
+    display: flex;
+    color: white;
+    justify-content: space-between;
+    margin: 0 40px 0 40px;
+}
+
+.socials {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 2px solid blueviolet;
+    gap: 20px;
+    height: fit-content;
+}
