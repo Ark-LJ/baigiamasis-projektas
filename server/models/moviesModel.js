@@ -6,10 +6,6 @@ const moviesSchema = new Schema({
         type: String,
         required: true
     },
-    short_description:{
-        type: String,
-        required: true
-    },
     description:{
         type: String,
         required: true
@@ -22,7 +18,7 @@ const moviesSchema = new Schema({
         type: [String],
         required: true
     },
-    imdb_rating:{
+    imdb:{
         type: Number,
         required: true
     },
