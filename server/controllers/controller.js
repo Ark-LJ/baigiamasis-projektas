@@ -1,10 +1,10 @@
-import Movies from '../models/moviesModel';
+import Movies from '../models/moviesModel.js';
 import mongoose from 'mongoose';
 
 
 // GET - paimti visus movie...
 export const getMovies = async (req, res) => {
-    const user_id = req.user._id
+    // const user_id = req.user._id
     const filmai = await Movies.find({})
     res.status(200).json(filmai)
 }
@@ -35,7 +35,7 @@ export const createMovie = async (req, res) => {
     if(!description) {emptyFields.push('description')}
     if(!release_year) {emptyFields.push('release_year')}
     if(!genres) {emptyFields.push('genres')}
-    if(!imdb_rating) {emptyFields.push('imdb_rating')}
+    if(!imdb_rating) {emptyFields.push('imdb')}
     if(!director) {emptyFields.push('director')}
     if(!cast) {emptyFields.push('cast')}
     if(emptyFields.length > 0) {
@@ -43,8 +43,8 @@ export const createMovie = async (req, res) => {
     }
 
     try {
-        const user_id = req.user._id
-        const filmas = await Movies.create({title, description, short_description, release_year, genres, imdb_rating, director, cast, user_id})
+        // const user_id = req.user._id
+        const filmas = await Movies.create({title, description, short_description, release_year, genres, imdb_rating, director, cast})
         res.status(200).json(filmas)
     } catch(error) {
         res.status(400).json({error: error.message})

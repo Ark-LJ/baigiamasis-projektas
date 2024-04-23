@@ -19,6 +19,11 @@ app.use((req, res, next) => {
     next()
 })
 
+
+// routes...
+app.use('/api/movies', moviesRoutes)
+
+
 //routes
 
 // app.get('*', authMiddleware.checkUser)
@@ -31,6 +36,7 @@ app.use('/api/reservation', reservationRoutes)
 app.get('/', (req, res) => {
     res.json({mssg: 'Welcome to the app!'})
 })
+
 
 // db connect
 mongoose.connect(process.env.URI)
