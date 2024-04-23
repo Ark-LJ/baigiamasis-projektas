@@ -13,11 +13,7 @@
 //                 res.locals.user = user
 //                 next()
 //             }
-<<<<<<< HEAD
-
-=======
             
->>>>>>> 6b0289282b61a2d73719b2743bd37a38f8210a96
 //         })
 //     } else {
 //         res.locals.user = null

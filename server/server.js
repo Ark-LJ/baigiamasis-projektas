@@ -33,7 +33,7 @@ app.use('/api/reservation', reservationRoutes)
 app.use('/api/movies', moviesRoutes)
 app.use('/api/reservation', reservationRoutes)
 
-
+app.use(express.static('public'));
 
 //testing if it works
 app.get('/', (req, res) => {
