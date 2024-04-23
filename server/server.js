@@ -1,13 +1,16 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
-import user from './models/user' //atkreipt demesi ir pakeist jeigu modelio name is didziosios raides ar ne
+import User from './models/userModel.js' //atkreipt demesi ir pakeist jeigu modelio name is didziosios raides ar ne
 import jwt from 'jsonwebtoken'
+import moviesRoutes from './routes/movies.js'
 
 dotenv.config()
 
 // express app
 const app = express()
+
+
 
 // middleware
 app.use(express.json())
@@ -15,6 +18,11 @@ app.use((req, res, next) => {
     console.log(req.path, req.method)
     next()
 })
+
+
+// routes...
+app.use('/api/movies', moviesRoutes)
+
 
 // speju cia front-endas tures isimest situos poto kur ir kada reikes?
 // also, ar cia gali but jie ar atskiram faile kelt check ir auth?
@@ -54,10 +62,13 @@ const requireAuth = (req, res, next) => {
     }
 }
 
+
+
 //testing if it works
 app.get('/', (req, res) => {
     res.json({mssg: 'Welcome to the app!'})
 })
+
 
 // db connect
 mongoose.connect(process.env.URI)
