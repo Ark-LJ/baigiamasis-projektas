@@ -2,35 +2,31 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema
 const moviesSchema = new Schema({
-    title:{
+    title: {
         type: String,
         required: true
     },
-    short_description:{
+    description: {
         type: String,
         required: true
     },
-    description:{
-        type: String,
-        required: true
-    },
-    release_year:{
+    release_year: {
         type: Number,
-        required: true
+        required: true,
     },
-    genres:{
+    genres: {
         type: [String],
         required: true
     },
-    imdb_rating:{
+    imdb: {
         type: Number,
-        required: true
+        required: true,
     },
-    director:{
+    director: {
         type: [String],
         required: true
     },
-    cast:{
+    cast: {
         type: [String],
         required: true
     }

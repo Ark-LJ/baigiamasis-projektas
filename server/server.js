@@ -4,6 +4,9 @@ import mongoose from 'mongoose'
 import User from './models/userModel.js' //atkreipt demesi ir pakeist jeigu modelio name is didziosios raides ar ne
 import jwt from 'jsonwebtoken'
 import moviesRoutes from './routes/movies.js'
+import reservationRoutes from './routes/reservation.js'
+import userRoutes from './routes/user.js'
+// import authMiddleware from './middleware/authMiddleware.js'
 
 dotenv.config()
 
@@ -22,6 +25,8 @@ app.use((req, res, next) => {
 
 // routes...
 app.use('/api/movies', moviesRoutes)
+app.use('/api/user', userRoutes)
+app.use('/api/reservation', reservationRoutes)
 
 
 // speju cia front-endas tures isimest situos poto kur ir kada reikes?
