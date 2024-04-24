@@ -5,7 +5,9 @@ import loadingImage from './200w.gif'
 //import Footer from './components/Footer.jsx';
 import Login from './components/Login.js'
 import Signup from './components/Signup.js'
-// import Main from './pages/Main.jsx'
+import Main from './pages/Main.jsx'
+import Error from './components/Error.js'
+import Complete from './components/Complete.js'
 
 
 function App() {
@@ -30,9 +32,9 @@ function App() {
         {/* WIP, reikės pačekint ar galiu palikti tuščią class'ę div'ui, nes nenoriu perpildyti kodo nereikalingom clasėm */}
         <div className={(loading ? 'blur-content' : 'inner-container')}>
         <BrowserRouter>
-          {/*<Navbar />*/}
+          {/* <Navbar /> */}
           <div className="pages">
-             <Routes>
+            { <Routes>
                 <Route 
                   path='/'
                   element={<Login />}
@@ -41,10 +43,23 @@ function App() {
                   path='/signup'
                   element={<Signup />}
                 />
-            </Routes> 
+                <Route 
+                  path='/main'
+                  element={<Main />}
+                />
+                <Route 
+                  path='/complete'
+                  element={<Complete />}
+                />
+                <Route 
+                  path='*'
+                  element={<Error />}
+                />
+              
+            </Routes> }
           </div>
         </BrowserRouter>
-          {/*<Footer />*/}
+          {/* <Footer /> */}
         </div>
       </div>
     </>
