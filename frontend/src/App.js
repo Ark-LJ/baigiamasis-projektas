@@ -1,11 +1,11 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import loadingImage from './200w.gif'
+import Footer from './components/Footer.jsx';
 import Login from './components/Login.js'
 import Signup from './components/Signup.js'
-import Main from './pages/Main.jsx'
-import NotFound from './pages/NotFound.js'
-import { useAuthContext } from './hooks/useAuthContext.js'
+import AdminDashboard from './components/AdminDashboard.js'
+// import Main from './pages/Main.jsx'
 
 
 function App() {
@@ -32,10 +32,6 @@ function App() {
         <BrowserRouter>
           <div className="pages">
             <Routes>
-                <Route
-                  path='*' 
-                  element={<NotFound />}
-                />
                 <Route 
                   path='/'
                   element={user ? <Navigate to="/main" /> : <Login />}
@@ -47,6 +43,10 @@ function App() {
                 <Route 
                   path='/signup'
                   element={!user ? <Signup /> : <Navigate to="/" />}
+                />
+                <Route
+                  path='/admindashboard'
+                  element={<AdminDashboard />}
                 />
             </Routes>
           </div>

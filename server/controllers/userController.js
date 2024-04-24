@@ -16,7 +16,6 @@ export const loginUser = async (req, res) => {
 
 // signup user...
 export const signupUser = async (req, res) => {
-    console.log(req.body)
     const {email, password} = req.body
     try {
         const user = await User.signup(email, password)
