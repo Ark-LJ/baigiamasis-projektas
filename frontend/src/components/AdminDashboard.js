@@ -86,7 +86,7 @@ const AdminDashboard = () => {
             <Navbar />
             <div className={pageClass}>
                 <div className='top-part'>
-                    <h1 className='baner1'>MOVIES THAT IS YOUR RIDE OR DIE.</h1>
+                    <h1 className='banner1'>MOVIES THAT IS YOUR RIDE OR DIE.</h1>
                     <img src={top} className='star' alt="movie_banner" />
                     <img src={star} className='star2' alt="movie_banner" />
                 </div>
