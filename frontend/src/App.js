@@ -4,7 +4,9 @@ import loadingImage from './200w.gif'
 import Login from './components/Login.js'
 import Signup from './components/Signup.js'
 import Main from './pages/Main.jsx'
-import NotFound from './pages/NotFound.js'
+import Error from './components/Error.js'
+import Complete from './components/Complete.js'
+import AdminDashboard from './components/AdminDashboard.js'
 import { useAuthContext } from './hooks/useAuthContext.js'
 
 
@@ -32,22 +34,30 @@ function App() {
         <BrowserRouter>
           <div className="pages">
             <Routes>
-                <Route
-                  path='*' 
-                  element={<NotFound />}
-                />
-                <Route 
-                  path='/'
-                  element={user ? <Navigate to="/main" /> : <Login />}
-                />
-                <Route 
-                  path='/main'
-                  element={user ? <Main /> : <Navigate to="/" />}
-                />
-                <Route 
-                  path='/signup'
-                  element={!user ? <Signup /> : <Navigate to="/" />}
-                />
+              <Route 
+                path='/'
+                element={user ? <Main /> : <Navigate to="/login" />}
+              />
+              <Route 
+                path='/login'
+                element={!user ? <Login /> : <Navigate to="/" />}
+              />
+              <Route 
+                path='/signup'
+                element={!user ? <Signup /> : <Navigate to="/" />}
+              />
+              <Route
+                path='/admindashboard'
+                element={<AdminDashboard />}
+              />
+              <Route 
+                path='/complete'
+                element={<Complete />}
+              />
+              <Route 
+                path='*'
+                element={<Error />}
+              />
             </Routes>
           </div>
         </BrowserRouter>

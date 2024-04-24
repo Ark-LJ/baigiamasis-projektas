@@ -1,42 +1,57 @@
-/* Placeholder Styling */
-
-html {
-    background: black;
-    color: white;
-}
-
-.container {
-    display: flex;
-    justify-content: space-between;
-    margin: 0;
-}
-
-nav {
-    align-self: center;
-    margin-right: 10px;
-}
-
-nav a {
-    margin-left: 10px;
-    background-color: aqua;
-    padding: 10px;
-    clip-path: polygon(50% 0%, 100% 0, 100% 62%, 76% 100%, 0 100%, 0 0);
-}
-
 /* Loading Cage styling. blur-content class styling is for blurring out the page while the page is "loading" */
-
 .loading-gif {
     position: absolute;
     z-index: 99;
     left: 50%; 
     bottom: 50%;
 }
-
 .blur-content {
     filter: blur(1.5rem);
 }
-
 /*  */
+
+/* Moodal */
+.modal {
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contents-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.modal-content {
+    background-color: #06001B;
+    color: #78F7FA;
+    padding: 20px;
+    /* max-width: 600px; */
+    width: 60%;
+    border: 1px solid #78F7FA;
+    /* max-height: 400px; */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    flex-direction: row;
+    display: flex;
+}
+
+.modal-content img {
+    width: 200px;
+    height: 300px;
+}
+
+.close {
+    /* position: absolute; */
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
 
 .footer-container {
     display: flex;
@@ -53,3 +68,367 @@ nav a {
     gap: 20px;
     height: fit-content;
 }
+
+
+/* sign up and login*/
+.sign{display: none;}
+
+.login_div{
+    
+    background-image: url("./components/images/loginbg.png");
+    background-repeat:no-repeat;
+    background-size: cover;
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+.kasete{
+    background-image: url("./components/images/kasete-galutinis1.png");
+    background-repeat: no-repeat;
+    width: 1200px;
+    height: 650px;
+    position:relative;
+    margin: 0;
+    
+   
+}
+
+.login_label{
+    margin:60px;
+      font-family: "JetBrains Mono";
+      font-size: 15px;
+      font-weight: 500;
+      
+    
+}
+.login_email{
+    position:absolute;
+    top: 220px;
+    left: 350px;
+    
+}
+.login_password{
+    position:absolute;
+    top: 290px;
+    left: 350px;
+
+}
+.button{
+border: none;
+border-radius: 35px;
+line-height: 29px;
+padding: 10px 20px;
+font-family: 'Bungee';
+font-weight: 600;
+font-size: 40px;
+}
+
+.button:hover{
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    border: 2px solid rgb(255, 255, 255);
+}
+.login_navig{
+    position: absolute;
+    bottom:50px;
+    left:500px;
+}
+.signup_navig{
+    position: absolute;
+    top:100px;
+    right:60px;
+}
+
+.l_label{
+    border:none;
+    background-color: transparent;
+    font-family: "JetBrains Mono";
+    font-weight: 300;
+    font-size: 20px;
+}
+
+
+
+
+.error_warning{
+    position: absolute;
+    top:90px;
+    left:80px;
+    font-family: "JetBrains Mono";
+    font-size: 20px;
+    font-weight: 500;
+    color:#fff;
+    width: 900px;
+      
+
+}
+@media all and (max-width: 1410px) {
+
+    .kasete{
+        background-image: url("./components/images/kasete-galutinis600.png");
+        width: 600px;
+        height: 330px;
+        position:relative;
+    }
+    
+    
+    .login_email{
+        position:absolute;
+        top: 75px;
+        left: 150px;    
+    }
+    .login_password{
+        position:absolute;
+        top: 115px;
+        left: 150px;
+    }
+    .button{
+    border-radius: 35px;
+    line-height: 29px;
+    padding: 0 5px;
+    font-size: 15px;
+    }
+    .login_navig{
+        position: absolute;
+        bottom:25px;
+        left:270px;
+    }
+    .signup_navig{
+        position: absolute;
+        top:48px;
+        right:30px;
+    }
+    
+    .l_label{
+        font-size: 15px;
+        width:100px;
+    }
+    
+    .error_warning{
+        position: absolute;
+        top:35px;
+        left:40px;
+        font-size: 15px;
+        width: 500px;
+    }
+}
+
+@media all and (max-width: 610px) {
+    .sign{
+        display: block;
+        color: #fff;
+        font-size: 30px;
+        font-family: 'Bungee';
+        font-weight: 600;
+    }
+
+    .login_div{
+        background-repeat:no-repeat;
+        background-size: cover;
+        height:100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 0;  
+    }
+    .sign{
+        display:block;
+        color: #fff;
+        font-size: 30px;
+        margin:5px;
+        font-family: 'Bungee';
+        font-weight: 600;
+    }
+
+
+    .kasete{
+        background-image: none;
+        background-color: rgba(27, 27, 27, 0.431);
+        width: 300px;
+        height: auto;
+        position:static;
+        border-radius:20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding:10px;
+    }
+    
+    
+    .login_email{
+        position:static;
+       color:#fff;
+    }
+    .login_password{
+        position:static;
+        color: #fff;
+    }
+    .button{
+    border-radius: 35px;
+    line-height: 29px;
+    padding: 0 10px;
+    font-size: 20px;
+
+    }
+    .login_navig{
+        position: static;
+        
+    }
+    .login_form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding:10px;
+    }
+    .signup_navig{
+        position: absolute;
+        top:10px;
+        right:10px;
+     
+    }
+    .login_label{
+        margin:10px 0;
+    }
+    
+    .l_label{
+        font-size: 15px;
+        width:100px;
+    }
+    .button{ 
+    margin:20px;
+    width:120px}
+    .error_warning{
+        position: static;
+        font-size: 15px;
+        width:auto;
+    }
+}
+
+/* Error page*/
+.error_div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(25, 25, 25);
+    height: 100vh;;
+}
+.error_img{
+    background-image: url(./components/images/404_750.jpg);
+    background-repeat: no-repeat;
+    width:750px;
+    height: 600px;
+ 
+
+
+}
+.error_btn{
+ 
+ border: none;
+border-radius: 35px;
+line-height: 29px;
+padding: 10px 20px;
+font-family: 'Bungee';
+font-weight: 600;
+font-size: 40px;
+
+    
+}
+
+.error_btn:hover{
+    color: rgb(255, 255, 255);
+    background-color: rgb(25, 25, 25);
+    border: 2px solid rgb(255, 255, 255);
+}
+@media all and (max-width:800px){
+    .error_img{
+        background-image: url(./components/images/404_300.jpg);
+        width: 300px;
+        height: 300px;
+    }
+
+    .error_btn{
+       padding: 5px 10px;
+       font-family: 'Bungee';
+       font-weight: 600;
+       font-size: 20px;
+       }
+
+}
+
+/* complete*/
+
+.complete_img{
+    background-image: url(./components/images/backg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: auto;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popcorn{
+    background-image: url(./components/images/popcorn300.png);
+    width:300px;
+    height: 512px;
+    margin: 30px;
+}
+
+
+.complete_text{
+    font-family: 'Bungee';
+    
+    width:480px;
+    
+}
+.complete_h{
+   
+    font-style: normal;
+    font-weight: 400;
+    font-size: 86px;
+    line-height: 103px;
+    color: #FFFFFF;
+    width:500px;
+    margin: 20px 0;
+    
+    }
+
+.complete_p{
+    margin-bottom:20px;
+    font-weight: 400;
+    font-size: 17px;
+    color: #FFFFFF;
+    line-height: 20px;
+}
+    @media screen and (max-width:860px) {
+        .complete_img{
+            flex-wrap: wrap;
+           
+            
+        }
+       .popcorn{background-image:url(./components/images/popcorn200.png);
+                width: 200px;
+            height: 330px;
+            margin: 10px;}
+            
+
+        .complete_text{width: 300px;}
+       .complete_h{
+            font-size: 50px;
+            line-height: 50px;
+            
+        }
+       .complete_p{
+            width:300px;
+        }
+
+
+
+    }

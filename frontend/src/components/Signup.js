@@ -1,77 +1,46 @@
-import { useState } from 'react';
+import { useState } from "react";
+import { useSignup } from "../hooks/useSignup.js";
 
 const Signup = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [signupError, setSignupError] = useState('')
+    const {signup, isLoading, error} = useSignup()
 
-    const handleLogin = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-
-        const passwordRequired = /^(?=.*[0-9]).{8,}$/
-        if (!passwordRequired.test(password)) {
-            setSignupError('Password must contain at least one number and be at least 8 characters long.')
-            return
-        }
-
-        const isEmailRegistered = (email) => {
-            const registeredEmails = ['test@gmail.com', 'example@yahoo.com']
-            return registeredEmails.includes(email)
-        }
-
-        if (!email && !password) {
-            setSignupError('You must enter your e-mail address and password.')
-            return
-        }
-
-        if (!email) {
-            setSignupError('You must enter an email address.')
-            return
-        }
-
-        if (!password) {
-            setSignupError('You must enter a password.')
-            return
-        }
-
-        if (isEmailRegistered(email)) {
-            setSignupError('This email address is already registered.')
-            return
-        }
-
-        console.log('Registracijos informacija:', { email, password })
-        setEmail('')
-        setPassword('')
-        setSignupError('')
+        await signup(email, password)
     }
 
     return (
-        <div>
-       <h2>Sign Up</h2>
-         <form onSubmit={handleLogin}>
-           <div>
-             <label htmlFor="email">E-mail:</label>
-                <input
-                    type="email"
-                    placeholder="E-mail"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-           </div>
-           <div>
-             <label htmlFor="password">Password:</label>
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
+        <div className="login_div">
+            <div className="kasete">
+                <h2 className="sign">SIGN UP</h2>
+                <form className="signup" onSubmit={handleSubmit}>
+                    <div className="login_label login_email">
+                        <label htmlFor="email">E-mail:</label>
+                        <input
+                            className="l_label"
+                            type="email"
+                            placeholder="E-mail"
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
+                        />
+                    </div>
+                    <div className="login_label  login_password">
+                        <label htmlFor="password">Password:</label>
+                        <input
+                            className="l_label"
+                            type="password"
+                            onChange={(e) => setPassword(e.target.value)}
+                            value={password}
+                        />
+                    </div>
+                    <button type="submit" className="login_navig button" disabled={isLoading}>SIGN UP</button>
+                    {error && <div className="error">{error}</div>}
+                </form>
             </div>
-            {signupError && <p>{signupError}</p>}
-            <button type="submit">Sign Up</button>
-         </form>
-      </div>
+        </div>
     )
 }
-
+ 
 export default Signup;
