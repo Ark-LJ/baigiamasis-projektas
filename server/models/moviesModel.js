@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema
 const moviesSchema = new Schema({
+    url: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true

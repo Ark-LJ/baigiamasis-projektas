@@ -1,63 +1,42 @@
-// import { useEffect, useState } from "react" fetchint info is DB
-// import { useRent } from './hooks/useRent.js
+import Footer from '../components/Footer.jsx'
+import Navbar from '../components/Navbar.jsx'
+import { useState, useEffect } from 'react'
 
-// Iškomentuoti nes dar nežinom kaip imsim duomenis.
 const Main = () => {
-    // const [movies, setMovies] = useState([])
-    // const [error, setError] = useState(null)
-    // useEffect(() => {
-    // const fetchMovies = async () => {
-    //     const response = await fetch(`/api/movies`)
-    //     const json = await response.json()
-    //     if(response.ok) {
-    //         setMovies(json)
-    //     }
-    //     if(!response.ok) {
-    //         setError(json.error)
-    //         console.log(error)
-    //     }
-    //     fetchMovies()
-    //   }
-    // }, [])
-    
-    // Very wishy washy post'as. Ir reik pridėt authentication dėl šito
-    // const handleAddToRent = async () => {
-    //     const filmas = {title, id, banner_path}
-    //     const response = await fetch('/api/rent', {
-    //         method: 'POST',
-    //         body: JSON.stringify(filmas),
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': `Bearer ${user.token}`
-    //         }
-    //     })
-    //     const json = await response.json()
-    //     if(!response.ok) {
-    //         setError(json.error)
-    //     }
-    //     if(response.ok) {
-    //         console.log('Filmas išnuomuotas', json)
-    //         dispatch({type: 'CREATE_RENT', payload: json})
-    //     }
-    // }
+    const [movies, setMovies] = useState([]);
+
+    useEffect(() => {
+        async function fetchMovies() {
+            try {
+                const response = await fetch('/api/movies');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch movies');
+                }
+                const moviesData = await response.json();
+                setMovies(moviesData);
+            } catch (error) {
+                console.error('Error fetching movies:', error);
+            }
+        }
+        fetchMovies();
+    }, []);
+
     return (
         <div className="main">
-            {/* <h1>MOVIES THAT IS YOUR RIDE OR DIE.</h1>
+            <Navbar />
+            <h1>MOVIES THAT IS YOUR RIDE OR DIE.</h1>
             <div className="search-container">
+                <button>All Movies</button>
                 <input type="text" className='search-input' placeholder='Movie'/>
             </div>
             <div className="movie-container">
-            {
-            movies.map(movie => {
-                return (
-                    <div className={'movies-list movie-item'} key={movie.id}>
-                        <button className='rent' onClick={() => handleAddToRent(movie)}></button>
-                        <img src={`./bannerio pathas/${movie.banner_path}`} alt="movie_banner" />
-                        <h3>{movie.title}</h3>
-                        </div>)
-                    })
-            }
-            </div> */}
+                {movies.map(movie => (
+                    <div className={'movie-item'} key={movie._id}>
+                        <img src={`${movie.url}`} alt="movie_banner" />
+                    </div>
+                ))}
+            </div>
+            <Footer />
         </div>
     )
 }

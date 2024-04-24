@@ -45,6 +45,17 @@ userSchema.statics.login = async function(email, password) {
     if(!email || !password) {
         throw Error('Visi laukeliai privalomi.')
     }
+
+    const user = await this.findOne({email})
+    if(!user) {
+        throw Error('El. paštas neteisingas')
+    }
+
+    const match = await bcrypt.compare(password, user.password)
+    if(!match) {
+        throw Error('Neteisingas slaptažodis')
+    }
+    return user
 }
 
 
