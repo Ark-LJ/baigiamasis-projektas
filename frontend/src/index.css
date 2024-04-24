@@ -212,7 +212,10 @@ font-size: 40px;
         display: block;
         color: #fff;
         font-size: 30px;
-        margin:5px;
+        font-family: 'Bungee';
+        font-weight: 600;
+       
+       
     }
 
     .login_div{
