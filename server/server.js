@@ -1,9 +1,11 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
-import User from './models/userModel.js' //atkreipt demesi ir pakeist jeigu modelio name is didziosios raides ar ne
-import jwt from 'jsonwebtoken'
 import moviesRoutes from './routes/movies.js'
+import reservationRoutes from './routes/reservation.js'
+import userRoutes from './routes/user.js'
+import draftsRoutes from './routes/drafts.js'
+// import authMiddleware from './middleware/authMiddleware.js'
 
 dotenv.config()
 
@@ -21,48 +23,12 @@ app.use((req, res, next) => {
 
 
 // routes...
+
+// app.get('*', authMiddleware.checkUser)
 app.use('/api/movies', moviesRoutes)
-
-
-// speju cia front-endas tures isimest situos poto kur ir kada reikes?
-// also, ar cia gali but jie ar atskiram faile kelt check ir auth?
-const checkUser = (req, res, next) =>{
-    const token = req.cookies.jwt
-    if(token){
-        jwt.verify(token, 'secret', async(err, decodedToken) =>{
-            if(err){
-                res.locals.user = null
-                next()
-            } else {
-                let user = await User.findById(decodedToken.id)
-                res.locals.user = user
-                next()
-            }
-            
-        })
-    } else {
-        res.locals.user = null
-        next()
-    }
-}
-
-const requireAuth = (req, res, next) => {
-    const token = req.cookies.jwt
-    if(token){
-        jwt.verify(token, 'secret', (err, decodedToken) =>{
-            if(err){
-                console.log(err.message)
-                res.redirect('/')
-            } else {
-                next()
-            }
-            })
-            } else {
-            res.redirect('/')
-    }
-}
-
-
+app.use('/api/user', userRoutes)
+app.use('/api/reservation', reservationRoutes)
+app.use('/api/drafts', draftsRoutes)
 
 //testing if it works
 app.get('/', (req, res) => {

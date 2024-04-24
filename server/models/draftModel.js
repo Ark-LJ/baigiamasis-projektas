@@ -1,7 +1,11 @@
 import mongoose from "mongoose";
 
 const Schema = mongoose.Schema
-const moviesSchema = new Schema({
+const draftSchema = new Schema({
+    status: {
+        type: String,
+        required: true
+    },
     url: {
         type: String,
         required: true
@@ -22,7 +26,7 @@ const moviesSchema = new Schema({
         type: [String],
         required: true
     },
-    imdb:{
+    imdb_rating:{
         type: Number,
         required: true,
     },
@@ -37,4 +41,4 @@ const moviesSchema = new Schema({
 })
 
 
-export default mongoose.model('Movies', moviesSchema)
+export default mongoose.model('Drafts', draftSchema)

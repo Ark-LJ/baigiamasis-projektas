@@ -1,46 +1,57 @@
-/* Placeholder Styling */
-
-body{
-    margin:0;
-    padding:0;}
-
-html {
-    background: black;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
-    display: flex;
-    justify-content: space-between;
-}
-
-nav {
-    align-self: center;
-    margin-right: 10px;
-}
-
-nav a {
-    margin-left: 10px;
-    background-color: aqua;
-    padding: 10px;
-    clip-path: polygon(50% 0%, 100% 0, 100% 62%, 76% 100%, 0 100%, 0 0);
-}
-
 /* Loading Cage styling. blur-content class styling is for blurring out the page while the page is "loading" */
-
 .loading-gif {
     position: absolute;
     z-index: 99;
     left: 50%; 
     bottom: 50%;
 }
-
 .blur-content {
     filter: blur(1.5rem);
 }
-
 /*  */
+
+/* Moodal */
+.modal {
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contents-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.modal-content {
+    background-color: #06001B;
+    color: #78F7FA;
+    padding: 20px;
+    /* max-width: 600px; */
+    width: 60%;
+    border: 1px solid #78F7FA;
+    /* max-height: 400px; */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    flex-direction: row;
+    display: flex;
+}
+
+.modal-content img {
+    width: 200px;
+    height: 300px;
+}
+
+.close {
+    /* position: absolute; */
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
 
 
 
@@ -75,7 +86,6 @@ nav a {
     align-items: center;
     margin: 0;
     padding: 0;
-    position:relative;
 }
 .kasete{
     background-image: url("./components/images/kasete-galutinis1.png");
@@ -121,6 +131,7 @@ font-size: 40px;
 .button:hover{
     color: rgb(255, 255, 255);
     background-color: rgb(0, 0, 0);
+    border: 2px solid rgb(255, 255, 255);
 }
 .login_navig{
     position: absolute;
@@ -214,8 +225,6 @@ font-size: 40px;
         font-size: 30px;
         font-family: 'Bungee';
         font-weight: 600;
-       
-       
     }
 
     .login_div{
@@ -227,6 +236,14 @@ font-size: 40px;
         align-items: center;
         margin: 0;
         padding: 0;  
+    }
+    .sign{
+        display:block;
+        color: #fff;
+        font-size: 30px;
+        margin:5px;
+        font-family: 'Bungee';
+        font-weight: 600;
     }
 
 
@@ -294,6 +311,126 @@ font-size: 40px;
     }
 }
 
+/* Error page*/
+.error_div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(25, 25, 25);
+    height: 100vh;;
+}
+.error_img{
+    background-image: url(./components/images/404_750.jpg);
+    background-repeat: no-repeat;
+    width:750px;
+    height: 600px;
+ 
+
+
+}
+.error_btn{
+ 
+ border: none;
+border-radius: 35px;
+line-height: 29px;
+padding: 10px 20px;
+font-family: 'Bungee';
+font-weight: 600;
+font-size: 40px;
+
+    
+}
+
+.error_btn:hover{
+    color: rgb(255, 255, 255);
+    background-color: rgb(25, 25, 25);
+    border: 2px solid rgb(255, 255, 255);
+}
+@media all and (max-width:800px){
+    .error_img{
+        background-image: url(./components/images/404_300.jpg);
+        width: 300px;
+        height: 300px;
+    }
+
+    .error_btn{
+       padding: 5px 10px;
+       font-family: 'Bungee';
+       font-weight: 600;
+       font-size: 20px;
+       }
+
+}
+
+/* complete*/
+
+.complete_img{
+    background-image: url(./components/images/backg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: auto;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popcorn{
+    background-image: url(./components/images/popcorn300.png);
+    width:300px;
+    height: 512px;
+    margin: 30px;
+}
+
+
+.complete_text{
+    font-family: 'Bungee';
+    
+    width:480px;
+    
+}
+.complete_h{
+   
+    font-style: normal;
+    font-weight: 400;
+    font-size: 86px;
+    line-height: 103px;
+    color: #FFFFFF;
+    width:500px;
+    margin: 20px 0;
+    
+    }
+
+.complete_p{
+    margin-bottom:20px;
+    font-weight: 400;
+    font-size: 17px;
+    color: #FFFFFF;
+    line-height: 20px;
+}
+    @media screen and (max-width:860px) {
+        .complete_img{
+            flex-wrap: wrap;
+           
+            
+        }
+       .popcorn{background-image:url(./components/images/popcorn200.png);
+                width: 200px;
+            height: 330px;
+            margin: 10px;}
+            
+
+        .complete_text{width: 300px;}
+       .complete_h{
+            font-size: 50px;
+            line-height: 50px;
+            
+        }
+       .complete_p{
+            width:300px;
+        }
 
 
 
+    }
