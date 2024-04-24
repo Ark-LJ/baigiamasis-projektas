@@ -44,31 +44,40 @@ const Login = () => {
     }
 
     return (
-      <div>
-       <h2>Log In</h2>
-         <form onSubmit={handleLogin}>
-           <div>
-             <label htmlFor="email">E-mail:</label>
-                <input
-                    type="email"
-                    placeholder="E-mail"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-           </div>
-           <div>
-             <label htmlFor="password">Password:</label>
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-            </div>
-            {loginError && <p>{loginError}</p>}
-            <button type="submit">Log In</button>
-         </form>
-      </div>
+      
+      
+      <div className="login_div">
+      
+        <div className="kasete">
+        
+                <form onSubmit={handleLogin} className="login_form">
+                    <h2 className="sign">LOGIN</h2>
+                <div className="login_label login_email">
+                    <label htmlFor="email">E-mail:</label>
+                        <input className="l_label"
+                            type="email"
+                            placeholder="E-mail"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                </div>
+                <div className="login_label  login_password">
+                    <label htmlFor="password" >Password:</label>
+                        <input className="l_label"
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                    
+                    <button type="submit" className="login_navig button">LOGIN</button> 
+                    <button className="signup_navig button">SIGN UP</button>{/* nepajungtas button */}
+                    {loginError && <p className="error_warning">{loginError}</p>}
+                </form>
+        </div>
+    </div>
+    
     )
 }
 
