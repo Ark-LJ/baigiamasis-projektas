@@ -5,6 +5,7 @@ import moviesRoutes from './routes/movies.js'
 import reservationRoutes from './routes/reservation.js'
 import userRoutes from './routes/user.js'
 import draftsRoutes from './routes/drafts.js'
+import draftsRoutes from './routes/drafts.js'
 // import authMiddleware from './middleware/authMiddleware.js'
 
 dotenv.config()
@@ -44,5 +45,3 @@ mongoose.connect(process.env.URI)
         })
     })
     .catch((err) => console.log(err))
-
-

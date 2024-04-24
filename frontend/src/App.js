@@ -1,6 +1,7 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import loadingImage from './200w.gif'
+// import Footer from './components/Footer.jsx';
 import Login from './components/Login.js'
 import Signup from './components/Signup.js'
 import Main from './pages/Main.jsx'
@@ -19,7 +20,7 @@ function App() {
   
     return () => clearTimeout(timeout)
   }, [])
-  const {user} = useAuthContext()
+  // const {user} = useAuthContext()
   return (
     <>
       <div className="App">
