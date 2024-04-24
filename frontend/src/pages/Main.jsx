@@ -22,6 +22,8 @@ const Main = () => {
     }, []);
 
     return (
+    < >
+        <Navbar />
         <div className="main">
             <Navbar />
             <h1>MOVIES THAT IS YOUR RIDE OR DIE.</h1>
@@ -38,7 +40,8 @@ const Main = () => {
             </div>
             <Footer />
         </div>
+     <Footer />
+    </>
     )
 }
-
 export default Main

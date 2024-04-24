@@ -35,7 +35,7 @@ export const createMovie = async (req, res) => {
     if(!description) {emptyFields.push('description')}
     if(!release_year) {emptyFields.push('release_year')}
     if(!genres) {emptyFields.push('genres')}
-    if(!imdb_rating) {emptyFields.push('imdb')}
+    if(!imdb) {emptyFields.push('imdb')}
     if(!director) {emptyFields.push('director')}
     if(!cast) {emptyFields.push('cast')}
     if(emptyFields.length > 0) {
