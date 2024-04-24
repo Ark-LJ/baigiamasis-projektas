@@ -1,6 +1,7 @@
 import express from 'express';
 import * as controller from '../controllers/reservationController.js';
 
+
 const router = express.Router()
 
 router.get('/', controller.getReservations)

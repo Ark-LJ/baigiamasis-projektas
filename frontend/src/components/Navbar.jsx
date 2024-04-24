@@ -1,15 +1,15 @@
-import { Link } from "react-router-dom"
+// import { Link } from "react-router-dom"
 import logo from "./images/logo.png"
-// import { useLogout } from "../hooks/useLogout.js"
-// import { useAuthContext } from "../hooks/useAuthContext.js"
+import { useLogout } from "../hooks/useLogout.js"
+import { useAuthContext } from "../hooks/useAuthContext.js"
 // import { useAdminAuthContext } from "../hooks/useAdminAuthContext.js"
 
 const Navbar = () => {
-    // const {user} = useAuthContext()
-    // const {logout} = useLogout()
-    // const handleClick = (e) => {
-    //     logout()
-    // }
+    const {user} = useAuthContext()
+    const {logout} = useLogout()
+    const handleClick = () => {
+        logout()
+    }
     return (
         <header>
             <div className="container">
@@ -17,20 +17,15 @@ const Navbar = () => {
                     <img src={logo} alt="Logo" />
                 </div>
                 <nav>
-                    {/* {user && (
+                    {user && (
                         <div>
-                            <button onClick={handleClick}>Log Out</button>
+                            <button className="logoutBtn" onClick={handleClick}>Log Out</button>
                         </div>
-                    )} */}
-                    {/* {!user && ( */}
-                    <div className="sign-up">
-                        <Link to='/signup'>Sign Up</Link>
-                    </div>
-                    {/* )} */}
+                    )}
                 </nav>
             </div>
         </header>
     )
 }
 
-export default Navbar;
+export default Navbar

@@ -1,6 +1,7 @@
 import Reservation from '../models/reservationModel.js'
 import mongoose from 'mongoose'
 
+
 // GET - paimti visus userio rezervations
 export const getReservations = async (req, res) => {
     // const user_id = req.user._id

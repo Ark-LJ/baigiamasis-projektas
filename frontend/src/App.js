@@ -1,12 +1,13 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import loadingImage from './200w.gif'
-// import Footer from './components/Footer.jsx';
 import Login from './components/Login.js'
 import Signup from './components/Signup.js'
 import Main from './pages/Main.jsx'
 import Error from './components/Error.js'
 import Complete from './components/Complete.js'
+import AdminDashboard from './components/AdminDashboard.js'
+import { useAuthContext } from './hooks/useAuthContext.js'
 
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
   
     return () => clearTimeout(timeout)
   }, [])
-  // const {user} = useAuthContext()
+  const {user} = useAuthContext()
   return (
     <>
       <div className="App">
@@ -33,34 +34,31 @@ function App() {
         <BrowserRouter>
           <div className="pages">
             <Routes>
-              <Route path='/' element={<Login />} />
-              <Route path='/signup' element={<Signup />} />
-                {/* <Route 
-                  path='/'
-                  element={user ? <Navigate to="/main" /> : <Login />}
-                />
-                <Route 
-                  path='/main'
-                  element={user ? <Main /> : <Navigate to="/" />}
-                />
-                <Route 
-                  path='/signup'
-                  element={!user ? <Signup /> : <Navigate to="/" />}
-                /> */}
-                <Route
-                  path='/admindashboard'
-                  element={<AdminDashboard />}
-                />
-                <Route 
-                  path='/complete'
-                  element={<Complete />}
-                />
-                <Route 
-                  path='*'
-                  element={<Error />}
-                />
-              
-            </Routes> }
+              <Route 
+                path='/'
+                element={user ? <Main /> : <Navigate to="/login" />}
+              />
+              <Route 
+                path='/login'
+                element={!user ? <Login /> : <Navigate to="/" />}
+              />
+              <Route 
+                path='/signup'
+                element={!user ? <Signup /> : <Navigate to="/" />}
+              />
+              <Route
+                path='/admindashboard'
+                element={<AdminDashboard />}
+              />
+              <Route 
+                path='/complete'
+                element={<Complete />}
+              />
+              <Route 
+                path='*'
+                element={<Error />}
+              />
+            </Routes>
           </div>
         </BrowserRouter>
         </div>

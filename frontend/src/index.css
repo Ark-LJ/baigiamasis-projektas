@@ -1,42 +1,57 @@
-/* Placeholder Styling */
-
-html {
-    background: black;
-    color: white;
-}
-
-.container {
-    display: flex;
-    justify-content: space-between;
-    margin: 0;
-}
-
-nav {
-    align-self: center;
-    margin-right: 10px;
-}
-
-nav a {
-    margin-left: 10px;
-    background-color: aqua;
-    padding: 10px;
-    clip-path: polygon(50% 0%, 100% 0, 100% 62%, 76% 100%, 0 100%, 0 0);
-}
-
 /* Loading Cage styling. blur-content class styling is for blurring out the page while the page is "loading" */
-
 .loading-gif {
     position: absolute;
     z-index: 99;
     left: 50%; 
     bottom: 50%;
 }
-
 .blur-content {
     filter: blur(1.5rem);
 }
-
 /*  */
+
+/* Moodal */
+.modal {
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contents-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.modal-content {
+    background-color: #06001B;
+    color: #78F7FA;
+    padding: 20px;
+    /* max-width: 600px; */
+    width: 60%;
+    border: 1px solid #78F7FA;
+    /* max-height: 400px; */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    flex-direction: row;
+    display: flex;
+}
+
+.modal-content img {
+    width: 200px;
+    height: 300px;
+}
+
+.close {
+    /* position: absolute; */
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
 
 .footer-container {
     display: flex;
@@ -69,7 +84,6 @@ nav a {
     align-items: center;
     margin: 0;
     padding: 0;
-    
 }
 .kasete{
     background-image: url("./components/images/kasete-galutinis1.png");
@@ -203,7 +217,13 @@ font-size: 40px;
 }
 
 @media all and (max-width: 610px) {
-   
+    .sign{
+        display: block;
+        color: #fff;
+        font-size: 30px;
+        font-family: 'Bungee';
+        font-weight: 600;
+    }
 
     .login_div{
         background-repeat:no-repeat;
@@ -412,4 +432,3 @@ font-size: 40px;
 
 
     }
-
