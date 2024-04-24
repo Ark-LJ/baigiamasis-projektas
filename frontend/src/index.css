@@ -51,3 +51,236 @@ nav a {
     gap: 20px;
     height: fit-content;
 }
+
+
+/* sign up and login*/
+.sign{display: none;}
+
+.login_div{
+    
+    background-image: url("./components/images/loginbg.png");
+    background-repeat:no-repeat;
+    background-size: cover;
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    position:relative;
+}
+.kasete{
+    background-image: url("./components/images/kasete-galutinis1.png");
+    background-repeat: no-repeat;
+    width: 1200px;
+    height: 650px;
+    position:relative;
+    margin: 0;
+    
+   
+}
+
+.login_label{
+    margin:60px;
+      font-family: "JetBrains Mono";
+      font-size: 15px;
+      font-weight: 500;
+      
+    
+}
+.login_email{
+    position:absolute;
+    top: 220px;
+    left: 350px;
+    
+}
+.login_password{
+    position:absolute;
+    top: 290px;
+    left: 350px;
+
+}
+.button{
+border: none;
+border-radius: 35px;
+line-height: 29px;
+padding: 10px 20px;
+font-family: 'Bungee';
+font-weight: 600;
+font-size: 40px;
+}
+
+.button:hover{
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+}
+.login_navig{
+    position: absolute;
+    bottom:50px;
+    left:500px;
+}
+.signup_navig{
+    position: absolute;
+    top:100px;
+    right:60px;
+}
+
+.l_label{
+    border:none;
+    background-color: transparent;
+    font-family: "JetBrains Mono";
+    font-weight: 300;
+    font-size: 20px;
+}
+
+
+
+
+.error_warning{
+    position: absolute;
+    top:90px;
+    left:80px;
+    font-family: "JetBrains Mono";
+    font-size: 20px;
+    font-weight: 500;
+    color:#fff;
+    width: 900px;
+      
+
+}
+@media all and (max-width: 1410px) {
+
+    .kasete{
+        background-image: url("./components/images/kasete-galutinis600.png");
+        width: 600px;
+        height: 330px;
+        position:relative;
+    }
+    
+    
+    .login_email{
+        position:absolute;
+        top: 75px;
+        left: 150px;    
+    }
+    .login_password{
+        position:absolute;
+        top: 115px;
+        left: 150px;
+    }
+    .button{
+    border-radius: 35px;
+    line-height: 29px;
+    padding: 0 5px;
+    font-size: 15px;
+    }
+    .login_navig{
+        position: absolute;
+        bottom:25px;
+        left:270px;
+    }
+    .signup_navig{
+        position: absolute;
+        top:48px;
+        right:30px;
+    }
+    
+    .l_label{
+        font-size: 15px;
+        width:100px;
+    }
+    
+    .error_warning{
+        position: absolute;
+        top:35px;
+        left:40px;
+        font-size: 15px;
+        width: 500px;
+    }
+}
+
+@media all and (max-width: 610px) {
+    .sign{
+        display: block;
+        color: #fff;
+        font-size: 30px;
+        margin:5px;
+        font-family: 'Bungee';
+        font-weight: 600;
+    }
+
+    .login_div{
+        background-repeat:no-repeat;
+        background-size: cover;
+        height:100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 0;  
+    }
+
+
+    .kasete{
+        background-image: none;
+        background-color: rgba(27, 27, 27, 0.431);
+        width: 300px;
+        height: auto;
+        position:static;
+        border-radius:20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding:10px;
+    }
+    
+    
+    .login_email{
+        position:static;
+       color:#fff;
+    }
+    .login_password{
+        position:static;
+        color: #fff;
+    }
+    .button{
+    border-radius: 35px;
+    line-height: 29px;
+    padding: 0 10px;
+    font-size: 20px;
+
+    }
+    .login_navig{
+        position: static;
+        
+    }
+    .login_form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding:10px;
+    }
+    .signup_navig{
+        position: absolute;
+        top:10px;
+        right:10px;
+     
+    }
+    .login_label{
+        margin:10px 0;
+    }
+    
+    .l_label{
+        font-size: 15px;
+        width:100px;
+    }
+    .button{ 
+    margin:20px;
+    width:120px}
+    .error_warning{
+        position: static;
+        font-size: 15px;
+        width:auto;
+    }
+}
