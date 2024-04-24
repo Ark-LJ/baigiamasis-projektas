@@ -383,13 +383,8 @@ font-size: 40px;
     font-weight: 400;
     font-size: 17px;
     color: #FFFFFF;
-line-height: 20px;
-
-color: #FFFFFF;
-
-
-
-    }
+    line-height: 20px;
+}
     @media screen and (max-width:860px) {
         .complete_img{
             flex-wrap: wrap;
@@ -402,7 +397,7 @@ color: #FFFFFF;
             margin: 10px;}
             
 
-            .complete_text{width: 300px;}
+        .complete_text{width: 300px;}
        .complete_h{
             font-size: 50px;
             line-height: 50px;

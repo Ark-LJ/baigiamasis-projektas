@@ -23,7 +23,7 @@ const Navbar = () => {
                         </div>
                     )} */}
                     {/* {!user && ( */}
-                    <div>
+                    <div className="sign-up">
                         <Link to='/signup'>Sign Up</Link>
                     </div>
                     {/* )} */}
