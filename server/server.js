@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 import moviesRoutes from './routes/movies.js'
 import reservationRoutes from './routes/reservation.js'
 import userRoutes from './routes/user.js'
-// import authMiddleware from './middleware/authMiddleware.js'
+import authMiddleware from './middleware/authMiddleware.js'
 
 dotenv.config()
 
@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 
 // routes...
 
-// app.get('*', authMiddleware.checkUser)
+app.get('*', authMiddleware.checkUser)
 app.use('/api/movies', moviesRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/reservation', reservationRoutes)
@@ -43,5 +43,3 @@ mongoose.connect(process.env.URI)
         })
     })
     .catch((err) => console.log(err))
-
-

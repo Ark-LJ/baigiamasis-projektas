@@ -2,11 +2,13 @@
 
 html {
     background: black;
+    color: white;
 }
 
 .container {
     display: flex;
     justify-content: space-between;
+    margin: 0;
 }
 
 nav {

@@ -1,26 +1,23 @@
 import { useState } from 'react';
+import axios from 'axios';
 
 const Signup = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [signupError, setSignupError] = useState('')
+    const [signupSuccess, setSignupSuccess] = useState(false)
 
-    const handleLogin = (e) => {
+    const handleSignup = async (e) => {
         e.preventDefault()
+
+        if (!email && !password) {
+            setSignupError('You must enter your e-mail address and password.')
+            return
+        }
 
         const passwordRequired = /^(?=.*[0-9]).{8,}$/
         if (!passwordRequired.test(password)) {
             setSignupError('Password must contain at least one number and be at least 8 characters long.')
-            return
-        }
-
-        const isEmailRegistered = (email) => {
-            const registeredEmails = ['test@gmail.com', 'example@yahoo.com']
-            return registeredEmails.includes(email)
-        }
-
-        if (!email && !password) {
-            setSignupError('You must enter your e-mail address and password.')
             return
         }
 
@@ -34,15 +31,17 @@ const Signup = () => {
             return
         }
 
-        if (isEmailRegistered(email)) {
-            setSignupError('This email address is already registered.')
-            return
+        try {
+            const response = await axios.post('/api/user/signup', { email, password })
+            console.log('Registration successful:', response.data)
+            setSignupSuccess(true)
+        } catch (error) {
+            console.error('Registration failed:', error.response.data.error)
+            setSignupError(error.response.data.error)
         }
 
-        console.log('Registracijos informacija:', { email, password })
         setEmail('')
         setPassword('')
-        setSignupError('')
     }
 
     return (
