@@ -1,7 +1,7 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import loadingImage from './200w.gif'
-import Footer from './components/Footer.jsx';
+// import Footer from './components/Footer.jsx';
 import Login from './components/Login.js'
 import Signup from './components/Signup.js'
 import Main from './pages/Main.jsx'
@@ -18,7 +18,7 @@ function App() {
   
     return () => clearTimeout(timeout)
   }, [])
-  const {user} = useAuthContext()
+  // const {user} = useAuthContext()
   return (
     <>
       <div className="App">
@@ -33,7 +33,9 @@ function App() {
         <BrowserRouter>
           <div className="pages">
             <Routes>
-                <Route 
+              <Route path='/' element={<Login />} />
+              <Route path='/signup' element={<Signup />} />
+                {/* <Route 
                   path='/'
                   element={user ? <Navigate to="/main" /> : <Login />}
                 />
@@ -44,7 +46,7 @@ function App() {
                 <Route 
                   path='/signup'
                   element={!user ? <Signup /> : <Navigate to="/" />}
-                />
+                /> */}
                 <Route
                   path='/admindashboard'
                   element={<AdminDashboard />}

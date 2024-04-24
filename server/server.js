@@ -4,7 +4,8 @@ import mongoose from 'mongoose'
 import moviesRoutes from './routes/movies.js'
 import reservationRoutes from './routes/reservation.js'
 import userRoutes from './routes/user.js'
-import authMiddleware from './middleware/authMiddleware.js'
+import draftsRoutes from './routes/drafts.js'
+// import authMiddleware from './middleware/authMiddleware.js'
 
 dotenv.config()
 
@@ -23,11 +24,12 @@ app.use((req, res, next) => {
 
 // routes...
 
-app.get('*', authMiddleware.checkUser)
+// app.get('*', authMiddleware.checkUser)
 app.use('/api/movies', moviesRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/reservation', reservationRoutes)
 app.use(express.static('public'));
+app.use('/api/drafts', draftsRoutes)
 
 //testing if it works
 app.get('/', (req, res) => {

@@ -31,13 +31,13 @@ export const createMovie = async (req, res) => {
     let emptyFields = []
 
     if(!title) {emptyFields.push('title')}
-    if(!short_description) {emptyFields.push('short_description')}
     if(!description) {emptyFields.push('description')}
     if(!release_year) {emptyFields.push('release_year')}
     if(!genres) {emptyFields.push('genres')}
-    if(!imdb) {emptyFields.push('imdb')}
+    if(!imdb_rating) {emptyFields.push('imdb_rating')}
     if(!director) {emptyFields.push('director')}
     if(!cast) {emptyFields.push('cast')}
+    if(!url) {emptyFields.push('url')}
     if(emptyFields.length > 0) {
         return res.status(400).json({error: 'Prašome užpildyti visus laukelius', emptyFields})
     }
@@ -54,7 +54,7 @@ export const createMovie = async (req, res) => {
 
 // PATCH - redaguoti vieną movie...
 export const updateMovie = async (req, res) => {
-    const {id} = req.body
+    const {id} = req.params 
     if(!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: 'Tokio filmo nėra.'})
     }
