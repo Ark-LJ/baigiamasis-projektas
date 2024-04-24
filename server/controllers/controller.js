@@ -26,7 +26,7 @@ export const getMovie = async (req, res) => {
 
 // POST - sukurti naują movie...
 export const createMovie = async (req, res) => {
-    const {title, description, short_description, release_year, genres, imdb_rating, director, cast} = req.body
+    const {title, description, short_description, release_year, genres, imdb, director, cast} = req.body
 
     let emptyFields = []
 
@@ -35,7 +35,7 @@ export const createMovie = async (req, res) => {
     if(!description) {emptyFields.push('description')}
     if(!release_year) {emptyFields.push('release_year')}
     if(!genres) {emptyFields.push('genres')}
-    if(!imdb_rating) {emptyFields.push('imdb')}
+    if(!imdb) {emptyFields.push('imdb')}
     if(!director) {emptyFields.push('director')}
     if(!cast) {emptyFields.push('cast')}
     if(emptyFields.length > 0) {

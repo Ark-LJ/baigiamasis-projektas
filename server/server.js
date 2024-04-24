@@ -22,17 +22,11 @@ app.use((req, res, next) => {
 
 
 // routes...
-app.use('/api/movies', moviesRoutes)
-app.use('/api/user', userRoutes)
-app.use('/api/reservation', reservationRoutes)
-
-
-//routes
 
 // app.get('*', authMiddleware.checkUser)
 app.use('/api/movies', moviesRoutes)
+app.use('/api/user', userRoutes)
 app.use('/api/reservation', reservationRoutes)
-
 app.use(express.static('public'));
 
 //testing if it works
