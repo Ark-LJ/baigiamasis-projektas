@@ -31,6 +31,7 @@ export const createDraft = async (req, res) => {
     let emptyFields = []
 
     if(!title) {emptyFields.push('title')}
+    if(!short_description) {emptyFields.push('short_description')}
     if(!description) {emptyFields.push('description')}
     if(!release_year) {emptyFields.push('release_year')}
     if(!genres) {emptyFields.push('genres')}

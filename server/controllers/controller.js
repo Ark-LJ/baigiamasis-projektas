@@ -26,7 +26,7 @@ export const getMovie = async (req, res) => {
 
 // POST - sukurti naują movie...
 export const createMovie = async (req, res) => {
-    const {url, title, description, short_description, release_year, genres, imdb_rating, director, cast} = req.body
+    const {url, title, description, release_year, genres, imdb_rating, director, cast} = req.body
 
     let emptyFields = []
 
@@ -54,7 +54,7 @@ export const createMovie = async (req, res) => {
 
 // PATCH - redaguoti vieną movie...
 export const updateMovie = async (req, res) => {
-    const {id} = req.params 
+    const {id} = req.body
     if(!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: 'Tokio filmo nėra.'})
     }

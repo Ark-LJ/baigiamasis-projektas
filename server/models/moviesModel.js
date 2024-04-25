@@ -22,7 +22,7 @@ const moviesSchema = new Schema({
         type: [String],
         required: true
     },
-    imdb_rating:{
+    imdb:{
         type: Number,
         required: true,
     },

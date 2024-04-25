@@ -41,4 +41,4 @@ const draftSchema = new Schema({
 })
 
 
-export default mongoose.model('Drafts', draftSchema);
+export default mongoose.model('Drafts', draftSchema)

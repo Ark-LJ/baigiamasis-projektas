@@ -30,7 +30,6 @@ app.use((req, res, next) => {
 app.use('/api/movies', moviesRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/reservation', reservationRoutes)
-app.use(express.static('public'));
 app.use('/api/drafts', draftsRoutes)
 
 //testing if it works
@@ -47,3 +46,5 @@ mongoose.connect(process.env.URI)
         })
     })
     .catch((err) => console.log(err))
+
+
