@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react'
 import star from './movies/star2.png'
 import top from './movies/start.png'
 import MovieModal from '../components/MovieModal.jsx'
+import OrderDetails from '../components/OrderDetails.jsx'
+import { useOrderContext } from "../hooks/useOrderContext.js"
+import { useAuthContext } from '../hooks/useAuthContext.js'
 
 
 const Main = () => {
@@ -14,6 +17,28 @@ const Main = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const moviesPerPage = 12;
+
+    const {orders, dispatch} = useOrderContext()
+    const {user} = useAuthContext()
+
+    useEffect(() => {
+        const fetchOrders = async () => {
+            if (user) {
+                try {
+                    const response = await fetch('/api/reservation', {
+                        headers: {'Authorization': `Bearer ${user.token}`}
+                    })
+                    const json = await response.json()
+                    if(response.ok) {
+                        dispatch({type: 'SET_ORDER', payload: json})
+                    }
+                } catch (error) {
+                    console.error('Error fetching orders:', error)
+                }
+            }
+        }
+        fetchOrders()
+    }, [dispatch, user])
 
     useEffect(() => {
         async function fetchMovies() {
@@ -66,7 +91,6 @@ const Main = () => {
         setIsModalOpen(false);
         setPageClass('main');
     }
-
     return (
     <>
         <Navbar />
@@ -88,63 +112,9 @@ const Main = () => {
                 <div>
                     <h2 className='banner2'>MOVIES THAT I ORDERED</h2>
                     <div className='movie-orders'>
-                    <ul className="ordered-list">
-                        <li className='ordered-list-item'>
-                            <div className='movie-split'>
-                                <span className="number">#1</span> 
-                                <span className="movie-name">Toy Story</span>   
-                            </div>
-                                <span className="order-date">2013/06/13</span>
-                            <div>
-                                <button className="btn-1">Edit order</button>
-                                <button className="btn-1">Delete my order</button>
-                            </div> 
-                        </li>
-                        <li className='ordered-list-item'> 
-                            <div className='movie-split'> 
-                                <span className="number">#2</span> 
-                                <span className="movie-name" >Titanic</span> 
-                            </div>
-                                <span className="order-date">2023/08/13</span> 
-                            <div>
-                                <button className="btn-1">Edit order</button>
-                                <button className="btn-1">Delete my order</button>
-                            </div>
-                        </li>
-                        <li className='ordered-list-item'> 
-                        <div className='movie-split'>
-                            <span className="number">#3</span> 
-                            <span className="movie-name">Men in Black</span>   
-                        </div>
-                            <span className="order-date">2013/06/13</span> 
-                        <div>     
-                            <button className="btn-1">Edit order</button>
-                            <button className="btn-1">Delete my order</button>
-                        </div>  
-                        </li>
-                        <li className='ordered-list-item'> 
-                        <div className='movie-split'>
-                            <span className="number">#4</span> 
-                            <span className="movie-name">Men in Black</span> 
-                        </div>
-                            <span className="order-date">2013/06/13</span> 
-                        <div>       
-                            <button className="btn-1">Edit order</button>
-                            <button className="btn-1">Delete my order</button>
-                        </div>
-                        </li>
-                        <li className='ordered-list-item'>
-                            <div className='movie-split'>
-                                <span className="number">#5</span> 
-                                <span className="movie-name">Forrest Gump</span> 
-                            </div>   
-                                <span className="order-date">2013/06/13</span> 
-                            <div>
-                                <button className="btn-1">Edit order</button>
-                                <button className="btn-1">Delete my order</button>
-                            </div>
-                        </li>
-                    </ul> 
+                        {orders && orders.map((order, index) => (
+                            <OrderDetails key={order._id} order={order} index={index} />
+                        ))}
                     </div>
                 </div>
                 <div className="search-container">
