@@ -1,12 +1,12 @@
 import Reservation from '../models/reservationModel.js'
 import mongoose from 'mongoose'
 
-
 // GET - paimti visus userio rezervations
 export const getReservations = async (req, res) => {
-    // const user_id = req.user._id
-    const reservations = await Reservation.find({})
+    const user_id = req.user._id
+    const reservations = await Reservation.find({user_id}).sort({createdAt: 1})
     res.status(200).json(reservations)
+    console.log(reservations)
 }
 
 // GET - paimti viena userio rezervation
@@ -24,19 +24,22 @@ export const getReservation = async (req, res) => {
 
 // POST - sukurti rezervacija
 export const createReservation = async (req, res) => {
-        const { user_id, movie_id } = req.body
-    
-        try {
-            const newReservation = new Reservation({
-                user_id,
-                movie_id
-            })
-            
-            const savedReservation = await newReservation.save()
-            res.status(201).json(savedReservation)
-        } catch (error) {
-            res.status(400).json({ message: "Error creating reservation", error: error.toString() })
-        }
+    const {movie_id} = req.body
+
+    let emptyFields = []
+
+    if (!movie_id) {emptyFields.push('movie_id')}
+    if (emptyFields.length > 0) {
+        return res.status(400).json({ error: 'Prašome užpildyti visus laukelius', emptyFields })
+    }
+
+    try {
+        const user_id = req.user._id
+        const reservation = await Reservation.create({user_id, movie_id})
+        res.status(200).json(reservation)
+    } catch(error) {
+        res.status(400).json({error: error.message})
+    }
     }
 
 

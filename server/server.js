@@ -5,7 +5,6 @@ import moviesRoutes from './routes/movies.js'
 import reservationRoutes from './routes/reservation.js'
 import userRoutes from './routes/user.js'
 import draftsRoutes from './routes/drafts.js'
-import cookieParser from 'cookie-parser'
 // import authMiddleware from './middleware/authMiddleware.js'
 
 dotenv.config()
@@ -16,7 +15,6 @@ const app = express()
 
 
 // middleware
-app.use(cookieParser())
 app.use(express.json())
 app.use((req, res, next) => {
     console.log(req.path, req.method)
