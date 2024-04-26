@@ -1,16 +1,19 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import Login from './components/Login.js'
-import Signup from './components/Signup.js'
+import Login from './pages/Login/Login.js'
+import Signup from './pages/Signup/Signup.js'
 import Main from './pages/Main.jsx'
-import Error from './components/Error.js'
-import Complete from './components/Complete.js'
-import AdminDashboard from './components/AdminDashboard.js'
+import Error from './pages/Error.js'
+import Complete from './pages/Complete.js'
+import AdminDashboard from './pages/AdminDashboard.js'
+import UserDashboard from './pages/UserDashboard.js'
 import { useAuthContext } from './hooks/useAuthContext.js'
+import AdminReservationList from './pages/AdminReservationList.js';
 
 
 function App() {
   const {user} = useAuthContext()
-  const isAdmin = user && user.role === 'admin';
+  const isAdmin = user && user.role === 'admin'
+  
   return (
     <>
       <div className="App">
@@ -18,7 +21,7 @@ function App() {
         <BrowserRouter>
           <div className="pages">
             <Routes>
-            <Route 
+              <Route 
                 path='/'
                 element={user ? <Main /> : <Navigate to="/login" />}
               />
@@ -35,8 +38,16 @@ function App() {
                 element={isAdmin ? <AdminDashboard /> : <Navigate to="/" />}
               />
               <Route 
+                path='/account'
+                element={user ? <UserDashboard /> : <Navigate to="/login" />}
+              />
+              <Route
+                  path='/admin-reservations'
+                  element={isAdmin ? <AdminReservationList /> : <Navigate to="/" />}
+                />
+              <Route 
                 path='/complete'
-                element={<Complete />}
+                element={user ? <Complete /> : <Navigate to="/login" />}
               />
               <Route 
                 path='*'

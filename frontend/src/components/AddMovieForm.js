@@ -14,15 +14,17 @@ const AddMovieForm = ({ onSubmit }) => {
         status: 'draft'
     })
 
+    const [confirmDialog, setConfirmDialog] = useState(false)
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value })
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        const apiEndpoint = formData.status === 'draft' ? '/api/drafts' : '/api/movies';
         try {
-            await axios.post('/api/movies', formData)
+            await axios.post(apiEndpoint, formData)
             console.log('Movie added successfully!')
             onSubmit(formData)
             setFormData({
@@ -36,9 +38,29 @@ const AddMovieForm = ({ onSubmit }) => {
                 url: '',
                 status: 'draft'
             })
+            window.location.reload()
         } catch (error) {
             console.error('Failed to add movie:', error)
         }
+    }
+
+    const handleStatusChange = (e) => {
+        const { name, value } = e.target
+        setFormData({ ...formData, [name]: value })
+        if (value === 'published') {
+            setConfirmDialog(true)
+        } else {
+            setConfirmDialog(false)
+        }
+    }
+
+    const handleConfirmStatusChange = async () => {
+        setConfirmDialog(false)
+        await handleSubmit()
+    }
+
+    const handleCancelStatusChange = () => {
+        setConfirmDialog(false)
     }
 
     return (
@@ -129,14 +151,24 @@ const AddMovieForm = ({ onSubmit }) => {
                     <select
                         name="status"
                         value={formData.status}
-                        onChange={handleChange}
+                        onChange={handleStatusChange}
                         required
                     >
                         <option value="draft">Draft</option>
                         <option value="published">Published</option>
                     </select>
                 </div>
-                <button type="submit">Add Movie</button>
+                {confirmDialog ? (
+                    <div>
+                        <p>Are you sure you want to publish the movie?</p>
+                        <button type="button" onClick={handleConfirmStatusChange}>Yes</button>
+                        <button type="button" onClick={handleCancelStatusChange}>No</button>
+                    </div>
+                ) : (
+                    <div>
+                        <button type="submit" onClick={handleStatusChange}>Add Movie</button>
+                    </div>   
+                )}
             </form>
         </div>
     )

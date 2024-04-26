@@ -16,7 +16,7 @@ padding: 0;
 
 /* NAV BAR. */ 
 
-.logoutBtn {
+.logoutBtn, .admindashboard, .accountbutton, .mainBtn {
 background-color: #06001B;
 font-family: 'Bungee';
 border: 4px solid #78F7FA;
@@ -32,13 +32,15 @@ padding-bottom: 10px;
 border-radius: 20px;
 }
 
+nav {
+    display: flex;
+}
 
 .container  {
 display: flex;
 align-items: center;
 justify-content: space-between;
-/* margin:60px; */
-/* checkthis */
+margin:60px;
 }
 
 nav div {
