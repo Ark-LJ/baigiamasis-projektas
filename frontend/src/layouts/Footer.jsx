@@ -1,7 +1,7 @@
-import fb from "./images/fb.png"
-import insta from "./images/insta.png"
-import eX from "./images/eX.png"
-import logo from "./images/logo.png"
+import fb from "../components/images/fb.png"
+import insta from "../components/images/insta.png"
+import eX from "../components/images/eX.png"
+import logo from "../components/images/logo.png"
 
 const Footer = () => {
     return (
@@ -38,9 +38,17 @@ const Footer = () => {
                     </ul>
                 </div>
                 <div className="socials">
-                    <img src={fb} alt="Facebook" />
-                    <img src={insta} alt="Instagram" />
-                    <img src={eX} alt="Twitter" />
+                    {/* Using target="_blank" without rel="noreferrer" (which implies rel="noopener") 
+                    is a security risk in older browsers */}
+                    <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
+                        <img src={fb} alt="Facebook" />
+                    </a>
+                    <a href="https://www.instagram.com" target="_blank" rel="noreferrer">
+                        <img src={insta} alt="Instagram" />
+                    </a>
+                    <a href="https://twitter.com" target="_blank" rel="noreferrer">
+                        <img src={eX} alt="Twitter" />
+                    </a>
                 </div>
             </div>
         </footer>

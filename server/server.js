@@ -5,7 +5,7 @@ import moviesRoutes from './routes/movies.js'
 import reservationRoutes from './routes/reservation.js'
 import userRoutes from './routes/user.js'
 import draftsRoutes from './routes/drafts.js'
-// import authMiddleware from './middleware/authMiddleware.js'
+import recommendRoutes from './routes/recommendationsRoutes.js'
 
 dotenv.config()
 
@@ -23,9 +23,8 @@ app.use((req, res, next) => {
 
 
 // routes...
-
-// app.get('*', authMiddleware.checkUser)
 app.use('/api/movies', moviesRoutes)
+app.use('/api/recomendation', recommendRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/reservation', reservationRoutes)
 app.use('/api/drafts', draftsRoutes)

@@ -1,26 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const EditMovieForm = ({ movie: initialMovie, onSubmit, onClose }) => {
-    const [movie, setMovie] = useState(initialMovie)
+const EditMovieForm = ({ movie: initialMovie, onClose }) => {
     const [formData, setFormData] = useState(null)
+    const [showStatusOptions, setShowStatusOptions] = useState(false)
+    const [confirmDialog, setConfirmDialog] = useState(false)
 
     useEffect(() => {
-        setMovie(initialMovie)
         setFormData(initialMovie)
+        setShowStatusOptions(initialMovie.status === 'draft')
     }, [initialMovie])
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value } = e.target
         setFormData({ ...formData, [name]: value })
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
         try {
-            await axios.patch(`/api/movies/${movie._id}`, formData)
+            let fetchUrl
+            if (formData.status === 'draft') {
+                fetchUrl = `/api/drafts/${initialMovie._id}`
+            } else if (formData.status === 'published') {
+                fetchUrl = `/api/drafts/publish/${initialMovie._id}`
+            } else {
+                fetchUrl = `/api/movies/${initialMovie._id}`
+            }
+            await axios.patch(fetchUrl, formData);
             console.log('Movie updated successfully!')
-            onSubmit(formData)
+            window.location.reload()
         } catch (error) {
             console.error('Failed to update movie:', error)
         }
@@ -28,6 +36,19 @@ const EditMovieForm = ({ movie: initialMovie, onSubmit, onClose }) => {
 
     const handleClose = () => {
         onClose()
+    }
+
+    const handleStatusChange = () => {
+        setConfirmDialog(true);
+    }
+
+    const handleConfirmStatusChange = async () => {
+        setConfirmDialog(false);
+        await handleSubmit();
+    }
+
+    const handleCancelStatusChange = () => {
+        setConfirmDialog(false);
     }
 
     return (
@@ -113,20 +134,32 @@ const EditMovieForm = ({ movie: initialMovie, onSubmit, onClose }) => {
                         required
                     />
                 </div>
-                <div>
-                    <label>Status:</label>
-                    <select
-                        name="status"
-                        value={formData ? formData.status : ''}
-                        onChange={handleChange}
-                        required
-                    >
-                        <option value="draft">Draft</option>
-                        <option value="published">Published</option>
-                    </select>
-                </div>
-                <button type="submit">Update Movie</button>
-                <button type="button" onClick={handleClose}>Close</button>
+                {showStatusOptions && (
+                    <div>
+                        <label>Status:</label>
+                        <select
+                            name="status"
+                            value={formData ? formData.status : ''}
+                            onChange={handleChange}
+                            required
+                        >
+                            <option value="draft">Draft</option>
+                            <option value="published">Published</option>
+                        </select>
+                    </div>
+                )}
+                {confirmDialog ? (
+                    <div>
+                        <p>Are you sure you want to change the status?</p>
+                        <button onClick={handleConfirmStatusChange}>Yes</button>
+                        <button onClick={handleCancelStatusChange}>No</button>
+                    </div>
+                ) : (
+                    <div>
+                        <button type="button" onClick={handleStatusChange}>Save</button>
+                        <button type="button" onClick={handleClose}>Close</button>
+                    </div>
+                )}
             </form>
         </div>
     )

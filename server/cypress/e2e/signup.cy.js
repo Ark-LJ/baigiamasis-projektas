@@ -1,6 +1,5 @@
 describe('Signup Page', () => {
     beforeEach(() => {
-      // Assuming your login page is served at this URL
       cy.visit('http://localhost:3000/signup');
     });
   
@@ -12,7 +11,7 @@ describe('Signup Page', () => {
       cy.get('input[type="password"]').should('exist');
     });
   
-    it('displays an error for invalid email format', () => {
+    it('Tikrina tinkamo el.pasto formata', () => {
         cy.get('input[type="email"]').type('invalid-email');
         cy.get('.signup button[type="submit"]').click();
         cy.get('input[type="email"]')
@@ -24,13 +23,33 @@ describe('Signup Page', () => {
       });
     
     it('Tikrinama, ar el.pastas nera uzimtas.', () => {
-
-          // Testing handling of an already taken email
-          cy.get('input[type="email"]').type('eligijus999@gmail.com');
-          cy.get('input[type="password"]').type('Testing1!');
-          cy.get('button[type="submit"]').click();
-          cy.get('.error').should('contain', 'El. paštas jau naudojamas.');
+        cy.get('input[type="email"]').type('eligijus999@gmail.com');
+        cy.get('input[type="password"]').type('Testing1!');
+        cy.get('button[type="submit"]').click();
+        cy.get('.error_warning').should('contain', 'El. paštas jau naudojamas.');
     })
+
+    it('Tikrinama slaptazodzio stiprumas', () => {
+      cy.get('input[type="email"]').type('testtest@gmail.com');
+      cy.get('input[type="password"]').type('3!');
+      cy.get('button[type="submit"]').click();
+      cy.get('.error_warning').should('contain', 'Password must contain at least one number and be at least 8 characters long.');
+})
+
+  it('Tikrinama sekminga vartotojo registracija bei token generation', () => {
+   cy.get('input[type="email"]').type('testawdwaessdt@gmail.com'); //pakeist i kita el.past su kiekvienu testu
+   cy.get('input[type="password"]').type('Testing1!');
+   cy.intercept('POST', '/api/user/signup').as('signupRequest');
+   cy.get('button[type="submit"]').click();
+   cy.wait('@signupRequest').its('response.statusCode').should('eq', 200);
+   cy.url().should('include', '/'); 
+   cy.window().then((win) => {
+       const userStr = win.localStorage.getItem('user');
+       expect(userStr).to.not.be.null;
+       const user = JSON.parse(userStr);
+       expect(user).to.have.property('token');
+})
+  })
     
   });
   

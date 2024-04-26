@@ -54,7 +54,7 @@ export const createMovie = async (req, res) => {
 
 // PATCH - redaguoti vieną movie...
 export const updateMovie = async (req, res) => {
-    const {id} = req.body
+    const {id} = req.params
     if(!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: 'Tokio filmo nėra.'})
     }

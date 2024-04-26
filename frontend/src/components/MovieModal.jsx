@@ -1,32 +1,55 @@
-import { useState, useEffect } from "react";
-import { useAuthContext } from "../hooks/useAuthContext";
-import { useOrderContext } from "../hooks/useOrderContext";
+import { useState, useEffect } from "react"
+import { useAuthContext } from "../hooks/useAuthContext"
+import { useOrderContext } from "../hooks/useOrderContext"
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
 
 const MovieModal = ({ movie, closeModal }) => {
     const {dispatch, orders} = useOrderContext()
     const [error, setError] = useState(null)
     const {user} = useAuthContext()
+    const [selectedDate, setSelectedDate] = useState(new Date())
+    const [selectedLocation, setSelectedLocation] = useState('')
+
+    const pickupLocations = [
+        'High Street 12 , London',
+        'Station Road 78 , London',
+        'Main Street 34 , Liverpool',
+        'Park Road, 36, Liverpool',
+        'Church Road 99, Manchester',
+        'Church Street 76, Birmingham',
+        'London Road 11, Birmingham',
+        'Victoria Road 12,Bradford'
+    ]
+
+    const handleLocationChange = (e) => {
+        setSelectedLocation(e.target.value)
+    }
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            setError(null);
-        }, 1000);
+            setError(null)
+        }, 1000)
 
-        return () => clearTimeout(timer);
-    }, [error]);
+        return () => clearTimeout(timer)
+    }, [error])
+    
+    const handleDateChange = (date) => {
+        setSelectedDate(date)
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (!user) {
-            setError('Būtina prisijungti');
-            return;
+            setError('Must be logged in!')
+            return
         }
-        const isMovieAlreadyOrdered = orders.some(order => order.movie_id === movie._id);
+        const isMovieAlreadyOrdered = orders.some(order => order.movie_id === movie._id)
+        const order = { user_id: user.token, movie_id: movie._id, pickup_date: selectedDate, pickup_location: selectedLocation }
         if (isMovieAlreadyOrdered) {
-            setError('This movie is already in your orders');
-            return;
+            setError('This movie is already in your order')
+            return
         }
-        const order = { user_id: user.token, movie_id: movie._id };
         try {
             const response = await fetch('/api/reservation', {
                 method: 'POST',
@@ -36,18 +59,18 @@ const MovieModal = ({ movie, closeModal }) => {
                     'Authorization': `Bearer ${user.token}`
                 }
             })
-            const json = await response.json();
+            const json = await response.json()
             if (!response.ok) {
-                setError(json.error);
+                setError(json.error)
             }
             if (response.ok) {
-                console.log('Naujas order pridėtas', json);
-                dispatch({ type: 'CREATE_ORDER', payload: json });
-                closeModal();
+                console.log('Naujas order pridėtas', json)
+                dispatch({ type: 'CREATE_ORDER', payload: json })
+                closeModal()
             }
         } catch (error) {
-            console.error('Error creating reservation:', error);
-            setError('Error creating reservation. Please try again.');
+            console.error('Error creating reservation:', error)
+            setError('Error creating reservation. Please try again.')
         }
     };
 
@@ -86,6 +109,20 @@ const MovieModal = ({ movie, closeModal }) => {
                         <p>Storyline</p>
                         <div>{movie.description}</div>
                     </div>
+                </div>
+                <div className="order-date">
+                        <p>Order pickup date:</p>
+                        <DatePicker
+                            selected={selectedDate}
+                            onChange={handleDateChange}
+                            minDate={new Date()}
+                        />
+                        <select value={selectedLocation} onChange={handleLocationChange}>
+                                <option value="">Select Pickup Location</option>
+                                {pickupLocations.map((location, idx) => (
+                                    <option key={idx} value={location}>{location}</option>
+                                ))}
+                        </select>
                 </div>
                 <div className='modal-bottom'>
                     <div className='button-container'>

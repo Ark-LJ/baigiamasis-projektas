@@ -12,6 +12,14 @@ export const orderReducer = (state, action) => {
             return {
                 orders: state.orders.filter(order => order._id !== action.payload._id)
             }
+        case 'UPDATE_ORDER':
+            const updatedOrders = state.orders.map(order => {
+                if (order._id === action.payload._id) {
+                    return action.payload
+                }
+                return order
+            })
+            return { orders: updatedOrders }
         default:
             return state
     }
