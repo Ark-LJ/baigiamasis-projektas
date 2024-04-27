@@ -31,7 +31,8 @@ describe('Movie Page', () => {
     //     cy.get('.movies-list .movie-item').should('be.visible');
     //   })
 
-    //   it('Vartotojas gali rezervuoti filma', () => { //istrinti pakurta rezervacija pagal sio testo paimta filma po kiekvieno testo
+    //   it('Vartotojas gali rezervuoti filma', () => { 
+           //istrinti pakurta rezervacija pagal sio testo paimta filma po kiekvieno testo
     //     cy.intercept('GET', '/api/movies').as('getMoviesRequest');
     //     cy.wait('@getMoviesRequest').its('response.statusCode').should('eq', 304);
     //     cy.get('div[class="movies-list"]').should('not.be.empty');
@@ -49,32 +50,44 @@ describe('Movie Page', () => {
     //     cy.get('.movies-list .movie-item').should('be.visible');
     //   })
 
-    //   it('Vartotojas gali koreguoti rezervacija', () => {
-    //     cy.intercept('PATCH', '/api/reservation/*').as('reservationPatch');
-    //     cy.get('.ordered-list-item .btn-1').first().click().should('contain', 'Save')
-    //     cy.get('.ordered-list-item .react-datepicker-wrapper').should('exist')
-    //     cy.get('.ordered-list-item select').should('exist')
-    //     cy.get('.ordered-list-item').find('select')
-    //     .then(select => {
-    //       const options = select.find('option').toArray();
-    //       const validOptions = options.filter(opt => opt.value !== '');
-    //       const randomOption = Cypress._.sample(validOptions); 
-    //       cy.wrap(select).select(randomOption.value);
-    //       cy.get('.ordered-list-item .btn-1').first().should('contain', 'Save').click()
-    //       cy.wait('@reservationPatch').its('response.statusCode').should('eq', 200);
-    //     })
-        
+    // it('Vartotojas gali koreguoti rezervacija', () => {
+    //   cy.intercept('PATCH', '/api/reservation/*').as('reservationPatch');
+    //   cy.get('.ordered-list-item .btn-1').first().click().should('contain', 'Save')
+    //   cy.get('.ordered-list-item .react-datepicker-wrapper').should('exist')
+    //   cy.get('.ordered-list-item select').should('exist')
+    //   cy.get('.ordered-list-item').find('select')
+    //   .then(select => {
+    //     const options = select.find('option').toArray();
+    //     const validOptions = options.filter(opt => opt.value !== '');
+    //     const randomOption = Cypress._.sample(validOptions); 
+    //     cy.wrap(select).select(randomOption.value);
+    //     cy.get('.ordered-list-item .btn-1').first().should('contain', 'Save').click()
+    //     cy.wait('@reservationPatch').its('response.statusCode').should('eq', 200);
+    //   })
+
+      it('Vartotojui vaizduoja klaida kai bandoma sukurti rezervacija neuzpildes duomenu', () => {
+        cy.intercept('GET', '/api/movies').as('getMoviesRequest');
+        cy.wait('@getMoviesRequest').its('response.statusCode').should('eq', 304);
+        cy.get('div[class="movies-list"]').should('not.be.empty');
+        cy.get('.movies-list .movie-item').first().click();
+        cy.get('.modal').should('be.visible');
+        cy.intercept('POST', '/api/reservation').as('reservationRequest');
+        cy.contains('button.close', 'Rent DVD').click();
+        cy.wait('@reservationRequest').its('response.statusCode').should('eq', 400)
+        cy.get('.modal-error').should('contain', 'Prašome užpildyti visus laukelius')
+
+      })
  
     //   })
 
-    it('Vartotojas gali istrinti rezervacija', () => {
-        cy.intercept('DELETE', '/api/reservation/*').as('reservationDelete');
-        cy.get('.ordered-list-item .btn-1').last().should('contain', 'Delete').click()
-        cy.wait('@reservationDelete').its('response.statusCode').should('eq', 200);
-        })
+    // it('Vartotojas gali istrinti rezervacija', () => {
+    //     cy.intercept('DELETE', '/api/reservation/*').as('reservationDelete');
+    //     cy.get('.ordered-list-item .btn-1').last().should('contain', 'Delete').click()
+    //     cy.wait('@reservationDelete').its('response.statusCode').should('eq', 200);
+    //     })
         
  
-      })
+
 
 
 
@@ -87,5 +100,5 @@ describe('Movie Page', () => {
     //     });
     //   });
 // })
-
+})
 // })

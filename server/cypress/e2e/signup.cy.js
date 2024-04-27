@@ -37,7 +37,8 @@ describe('Signup Page', () => {
 })
 
   it('Tikrinama sekminga vartotojo registracija bei token generation', () => {
-   cy.get('input[type="email"]').type('testawdwaessdt@gmail.com'); //pakeist i kita el.past su kiekvienu testu
+    //pakeist i kita el.past su kiekvienu testu!!!
+   cy.get('input[type="email"]').type('testawdwaessdt@gmail.com'); 
    cy.get('input[type="password"]').type('Testing1!');
    cy.intercept('POST', '/api/user/signup').as('signupRequest');
    cy.get('button[type="submit"]').click();

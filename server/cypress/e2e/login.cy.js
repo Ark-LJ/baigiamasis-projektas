@@ -2,7 +2,6 @@
 
 describe('Login Page', () => {
   beforeEach(() => {
-    // Assuming your login page is served at this URL
     cy.visit('http://localhost:3000');
   });
 
@@ -14,14 +13,19 @@ describe('Login Page', () => {
     cy.get('input[type="password"]').should('exist');
   });
 
-  //WIP - NEED UNCAUGHT ERROR TO GO AWAY
-  // it('Atvaizduojama klaida kai vartotoja iveda netinkamus duomenis', () => {
-  //   cy.get('input[type="email"]').type('eligijus999@gmail.com');
-  //   cy.get('input[type="password"]').type('Testinag1!');
+  it('Atvaizduojama klaida kai vartotojas iveda netinkama slaptazodi', () => {
+    cy.get('input[type="email"]').type('eligijus999@gmail.com');
+    cy.get('input[type="password"]').type('Testinag1!');
+    cy.get('button[type="submit"]').click();
+    cy.get('.error_warning').should('contain', 'Neteisingas slaptažodis')
+  });
 
-  //   cy.get('button[type="submit"]').click();
-    
-  // });
+  it('Atvaizduojama klaida kai vartotojas iveda netinkama el. pasta', () => {
+    cy.get('input[type="email"]').type('eligijus992349@gmail.com');
+    cy.get('input[type="password"]').type('Testing1!');
+    cy.get('button[type="submit"]').click();
+    cy.get('.error_warning').should('contain', 'El. paštas neteisingas')
+  });
 
   it('Vartotojas sekmingai prijungiamas ir token generuojamas', () => {
     cy.get('input[type="email"]').type('eligijus999@gmail.com');
@@ -38,12 +42,8 @@ describe('Login Page', () => {
         
     });
 
-    
   });
  
-
-
-
   });
 
 
