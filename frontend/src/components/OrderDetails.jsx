@@ -88,7 +88,6 @@ const OrderDetails = ({ order, index }) => {
             console.error('Error updating order:', error)
         }
     }
-
     return (
         <>
             <ul className="ordered-list">

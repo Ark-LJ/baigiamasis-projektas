@@ -50,7 +50,10 @@ const EditMovieForm = ({ movie: initialMovie, onClose }) => {
     const handleCancelStatusChange = () => {
         setConfirmDialog(false);
     }
-
+    if (!initialMovie) {
+        return <div>Movie data is not available.</div>;
+    }
+    
     return (
         <div>
             <h3>Edit Movie</h3>

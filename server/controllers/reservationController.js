@@ -8,6 +8,11 @@ export const getReservations = async (req, res) => {
     res.status(200).json(reservations)
     console.log(reservations)
 }
+export const getReservationsAdmin = async (req, res) => {
+    const reservations = await Reservation.find({}).sort({createdAt: 1})
+    res.status(200).json(reservations)
+    console.log(reservations)
+}
 
 // GET - paimti viena userio rezervation
 export const getReservation = async (req, res) => {
@@ -24,20 +29,21 @@ export const getReservation = async (req, res) => {
 
 // POST - sukurti rezervacija
 export const createReservation = async (req, res) => {
-    const {movie_id, pickup_date, pickup_location} = req.body
+    const {user_email, movie_id, pickup_date, pickup_location} = req.body
 
     let emptyFields = []
 
     if (!movie_id) {emptyFields.push('movie_id')}
     if (!pickup_date) {emptyFields.push('pickup_date')}
     if (!pickup_location) {emptyFields.push('pickup_location')}
+    if (!user_email) { emptyFields.push('user_email') }
     if (emptyFields.length > 0) {
         return res.status(400).json({ error: 'Prašome užpildyti visus laukelius', emptyFields })
     }
 
     try {
         const user_id = req.user._id
-        const reservation = await Reservation.create({user_id, movie_id, pickup_date, pickup_location})
+        const reservation = await Reservation.create({user_email, user_id, movie_id, pickup_date, pickup_location})
         res.status(200).json(reservation)
     } catch(error) {
         res.status(400).json({message: "Error creating reservation", error: error.toString()})

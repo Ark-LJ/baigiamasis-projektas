@@ -45,9 +45,9 @@ const MovieModal = ({ movie, closeModal }) => {
             return
         }
         const isMovieAlreadyOrdered = orders.some(order => order.movie_id === movie._id)
-        const order = { user_id: user.token, movie_id: movie._id, pickup_date: selectedDate, pickup_location: selectedLocation }
+        const order = { user_id: user._id, movie_id: movie._id, pickup_date: selectedDate, pickup_location: selectedLocation, user_email: user.email }
         if (isMovieAlreadyOrdered) {
-            setError('This movie is already in your order')
+            setError('This movie is already in your orders')
             return
         }
         try {
@@ -64,7 +64,6 @@ const MovieModal = ({ movie, closeModal }) => {
                 setError(json.error)
             }
             if (response.ok) {
-                console.log('Naujas order pridėtas', json)
                 dispatch({ type: 'CREATE_ORDER', payload: json })
                 closeModal()
             }

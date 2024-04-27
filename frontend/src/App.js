@@ -7,7 +7,7 @@ import Complete from './pages/Complete.js'
 import AdminDashboard from './pages/AdminDashboard.js'
 import UserDashboard from './pages/UserDashboard.js'
 import { useAuthContext } from './hooks/useAuthContext.js'
-import AdminReservationList from './pages/AdminReservationList.js';
+import AdminReservationList from './components/AdminReservationList.js';
 
 
 function App() {

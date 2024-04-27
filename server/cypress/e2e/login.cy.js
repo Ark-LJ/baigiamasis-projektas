@@ -1,5 +1,3 @@
-
-
 describe('Login Page', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000');
@@ -21,7 +19,7 @@ describe('Login Page', () => {
   });
 
   it('Atvaizduojama klaida kai vartotojas iveda netinkama el. pasta', () => {
-    cy.get('input[type="email"]').type('eligijus992349@gmail.com');
+    cy.get('input[type="email"]').type('bad@email');
     cy.get('input[type="password"]').type('Testing1!');
     cy.get('button[type="submit"]').click();
     cy.get('.error_warning').should('contain', 'El. paštas neteisingas')

@@ -1,165 +1,91 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const AdminMovieModal = ({ movie, closeModal, updateMovies }) => {
-    const [isEditing, setIsEditing] = useState(false);
-    const [editedMovie, setEditedMovie] = useState({
-        url: movie.url,
-        title: movie.title,
-        release_year: movie.release_year,
-        genres: movie.genres.join(', '),
-        director: movie.director.join(', '),
-        imdb_rating: movie.imdb_rating,
-        cast: movie.cast.join(', '),
-        description: movie.description
-    })
+const MovieList = ({ handleEdit }) => {
+    const [movies, setMovies] = useState([])
+    const [selectedMovie, setSelectedMovie] = useState(null)
+    const [searchTerm, setSearchTerm] = useState('')
+    const [currentPage, setCurrentPage] = useState(1)
+    const moviesPerPage = 12
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setEditedMovie({
-            ...editedMovie,
-            [name]: value
-        });
-    };
-
-    const handleEditSubmit = async () => {
-        try {
-            await axios.patch(`/api/movies/${movie._id}`, editedMovie)
-            closeModal()
-        } catch (error) {
-            console.error('Failed to update movie:', error)
+    useEffect(() => {
+        const fetchMovies = async () => {
+            try {
+                const response = await axios.get('/api/drafts')
+                setMovies(response.data)
+            } catch (error) {
+                console.error('Failed to fetch movies:', error)
+            }
         }
+
+        fetchMovies()
+    }, [])
+
+    const handleSelectMovie = (movie) => {
+        setSelectedMovie(movie)
     }
 
-    const handleDelete = async () => {
-        try {
-            await axios.delete(`/api/movies/${movie._id}`)
-            closeModal()
-            updateMovies()
-        } catch (error) {
-            console.error('Failed to delete movie:', error)
-        }
-    };
+    const handleCloseDetails = () => {
+        setSelectedMovie(null)
+    }
 
-    if (!movie) return null
+    const handleSearch = (e) => {
+        setSearchTerm(e.target.value)
+    }
+
+    const filteredMovies = movies.filter((movie) =>
+        movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+
+    const indexOfLastMovie = currentPage * moviesPerPage
+    const indexOfFirstMovie = indexOfLastMovie - moviesPerPage
+    const currentMovies = filteredMovies.slice(indexOfFirstMovie, indexOfLastMovie)
+
+    const totalPages = Math.ceil(filteredMovies.length / moviesPerPage)
+
+    const handleNextPage = () => {
+        setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))
+    }
+
+    const handlePrevPage = () => {
+        setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))
+    }
 
     return (
-        <div className="modal">
-            <div className="modal-content">
-                <div className='modal-top'>
-                    <img src={`${movie.url}`} alt="movie_banner" />
-                    <div className='text-container'>
-                        <h2>{movie.title}</h2>
-                        {isEditing ? (
-                            <div className='contents-container'>
-                                <div>
-                                    <p>Url</p>
-                                    <input
-                                        type="text"
-                                        name="url"
-                                        value={editedMovie.url}
-                                        onChange={handleInputChange}
-                                    />
-                                </div>
-                                <div>
-                                    <p>Year</p>
-                                    <input
-                                        type="number"
-                                        name="release_year"
-                                        value={editedMovie.release_year}
-                                        onChange={handleInputChange}
-                                    />
-                                </div>
-                                <div>
-                                    <p>Genre</p>
-                                    <input
-                                        type="text"
-                                        name="genres"
-                                        value={editedMovie.genres}
-                                        onChange={handleInputChange}
-                                    />
-                                </div>
-                                <div>
-                                    <p>Directed By</p>
-                                    <input
-                                        type="text"
-                                        name="director"
-                                        value={editedMovie.director}
-                                        onChange={handleInputChange}
-                                    />
-                                </div>
-                                <div>
-                                    <p>IMDB</p>
-                                    <input
-                                        type="number"
-                                        name="imdb_rating"
-                                        value={editedMovie.imdb_rating}
-                                        onChange={handleInputChange}
-                                    />
-                                </div>
-                            </div>
-                        ) : (
-                            <div className='contents-container'>
-                                <div>
-                                    <p>Year</p>
-                                    <div>{movie.release_year}</div>
-                                </div>
-                                <div>
-                                    <p>Genre</p>
-                                    <div>{movie.genres.join(', ')}</div>
-                                </div>
-                                <div>
-                                    <p>Directed By</p>
-                                    <div>{movie.director.join(', ')}</div>
-                                </div>
-                                <div>
-                                    <p>IMDB</p>
-                                    <div>{movie.imdb_rating} / 10</div>
-                                </div>
-                            </div>
-                        )}
-                        <p>Cast</p>
-                        {isEditing ? (
-                            <input
-                                type="text"
-                                name="cast"
-                                value={editedMovie.cast}
-                                onChange={handleInputChange}
-                            />
-                        ) : (
-                            <div>{movie.cast.join(', ')}</div>
-                        )}
-                        <p>Storyline</p>
-                        {isEditing ? (
-                            <textarea
-                                name="description"
-                                value={editedMovie.description}
-                                onChange={handleInputChange}
-                            />
-                        ) : (
-                            <div>{movie.description}</div>
-                        )}
-                    </div>
-                </div>
-                <div className='modal-bottom'>
-                    <div className='button-container'>
-                        {isEditing ? (
-                            <>
-                                <button className="close" onClick={handleEditSubmit}>Submit</button>
-                                <button className="close" onClick={() => setIsEditing(false)}>Cancel</button>
-                            </>
-                        ) : (
-                            <>
-                                <button className="close" onClick={() => setIsEditing(true)}>EDIT</button>
-                                <button className="close" onClick={handleDelete}>DELETE</button>
-                            </>
-                        )}
-                        <button className="close" onClick={closeModal}>Go Back</button>
-                    </div>
-                </div>
+        <div>
+            <h3>Drafts List</h3>
+            <input
+                type="text"
+                placeholder="Search movies..."
+                value={searchTerm}
+                onChange={handleSearch}
+            />
+            <ul>
+                {currentMovies.map((movie) => (
+                    <li key={movie._id} onClick={() => handleSelectMovie(movie)}>
+                        <img src={movie.url} alt="Cover" style={{ width: '200px', height: '300px', objectFit: 'cover' }} />
+                        <h3>{movie.title} {movie.release_year}</h3>
+                        <p>Status: {movie.status}</p>
+                    </li>
+                ))}
+            </ul>
+            <div>
+                <button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
+                <button onClick={handleNextPage} disabled={currentPage === totalPages}>Next</button>
             </div>
+            {selectedMovie && (
+                <div>
+                    <img src={selectedMovie.url} alt="Viršelis" style={{ width: '200px', height: '300px', objectFit: 'cover' }} />
+                    <h3>{selectedMovie.title}</h3>
+                    <p>Release year: {selectedMovie.release_year}</p>
+                    <p>Director: {selectedMovie.director}</p>
+                    <p>{selectedMovie.description}</p>
+                    <button onClick={() => handleEdit(selectedMovie)}>Edit</button>
+                    <button onClick={handleCloseDetails}>Back</button>
+                </div>
+            )}
         </div>
     )
 }
 
-export default AdminMovieModal
+export default MovieList;

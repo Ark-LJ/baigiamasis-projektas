@@ -1,29 +1,35 @@
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import MovieList from '../components/MovieList.js'
 import Footer from '../layouts/Footer.jsx'
 import Navbar from '../layouts/Navbar.jsx'
-import { useState, useEffect } from 'react'
-import star from './bgImages/star2.png'
-import top from './bgImages/start.png'
-import MovieModal from '../components/MovieModal.jsx'
-import AdminModal from '../components/AdminModal.js'
-import OrderDetails from '../components/OrderDetails.jsx'
-import { useOrderContext } from "../hooks/useOrderContext.js"
-import { useAuthContext } from '../hooks/useAuthContext.js'
+import star from '../pages/bgImages/star2.png'
+import top from '../pages/bgImages/start.png'
 
-const Main = () => {
+const AdminMain = () => {
     const [movies, setMovies] = useState([])
     const [selectedMovie, setSelectedMovie] = useState(null)
-    const [pageClass, setPageClass] = useState('main')
     const [searchTerm, setSearchTerm] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [pageClass, setPageClass] = useState('movies')
     const [recommendedMovies, setRecommendedMovies] = useState([])
     const [selectedGenre, setSelectedGenre] = useState('')
     const [selectedYear, setSelectedYear] = useState('')
     const moviesPerPage = 12
 
-    const {orders, dispatch} = useOrderContext()
-    const {user} = useAuthContext()
-    const isAdmin = user && user.role === 'admin'
+    useEffect(() => {
+        const fetchMovies = async () => {
+            try {
+                const response = await axios.get('/api/movies')
+                setMovies(response.data);
+            } catch (error) {
+                console.error('Failed to fetch movies:', error)
+            }
+        }
 
+        fetchMovies()
+    }, [])
     const genres = [
         'Action',
         'Adventure',
@@ -43,11 +49,48 @@ const Main = () => {
         'Thriller',
         'War',
         'Western'
-    ]
+    ];
     
     const years = [];
     for (let year = 1970; year <= 2024; year++) {
-        years.push(year.toString())
+        years.push(year.toString());
+    }
+
+    const handleSearch = (e) => {
+        setSearchTerm(e.target.value)
+    }
+
+    const filteredMovies = movies.filter((movie) =>
+        movie.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        (selectedGenre === '' || movie.genres.includes(selectedGenre)) &&
+        (selectedYear === '' || movie.release_year === selectedYear)
+    )
+
+    const indexOfLastMovie = currentPage * moviesPerPage
+    const indexOfFirstMovie = indexOfLastMovie - moviesPerPage
+    const currentMovies = filteredMovies.slice(indexOfFirstMovie, indexOfLastMovie)
+
+    const totalPages = Math.ceil(filteredMovies.length / moviesPerPage)
+
+    const handlePageClick = (page) => {
+        setCurrentPage(page);
+    }
+
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(i);
+    }
+
+    const openModal = (movie) => {
+        setSelectedMovie(movie);
+        setIsModalOpen(true);
+        setPageClass('movies blur-content')
+    }
+
+    const closeModal = () => {
+        setSelectedMovie(null);
+        setIsModalOpen(false);
+        setPageClass('movies');
     }
 
     const updateMovies = async () => {
@@ -64,41 +107,6 @@ const Main = () => {
     }
 
     useEffect(() => {
-        const fetchOrders = async () => {
-            if (user) {
-                try {
-                    const response = await fetch('/api/reservation', {
-                        headers: {'Authorization': `Bearer ${user.token}`}
-                    })
-                    const json = await response.json()
-                    if(response.ok) {
-                        dispatch({type: 'SET_ORDER', payload: json})
-                    }
-                } catch (error) {
-                    console.error('Error fetching orders:', error)
-                }
-            }
-        }
-        fetchOrders()
-    }, [dispatch, user])
-
-    useEffect(() => {
-        async function fetchMovies() {
-            try {
-                const response = await fetch('/api/movies')
-                if (!response.ok) {
-                    throw new Error('Failed to fetch movies')
-                }
-                const moviesData = await response.json()
-                setMovies(moviesData)
-            } catch (error) {
-                console.error('Error fetching movies:', error)
-            }
-        }
-        fetchMovies()
-    }, [])
-
-    useEffect(() => {
         async function fetchRecommendedMovies() {
             try {
                 const response = await fetch('/api/recomendation?sortBy=imdb_rating&limit=5')
@@ -113,45 +121,10 @@ const Main = () => {
         }
         fetchRecommendedMovies()
     }, [])
-    
 
-    const handleSearch = (e) => {
-        setSearchTerm(e.target.value)
-    }
-    const filteredMovies = movies.filter((movie) =>
-        movie.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        (selectedGenre === '' || movie.genres.includes(selectedGenre)) &&
-        (selectedYear === '' || movie.release_year === selectedYear)
-    )
-
-
-    const indexOfLastMovie = currentPage * moviesPerPage
-    const indexOfFirstMovie = indexOfLastMovie - moviesPerPage
-    const currentMovies = filteredMovies.slice(indexOfFirstMovie, indexOfLastMovie)
-
-    const totalPages = Math.ceil(filteredMovies.length / moviesPerPage)
-
-    const handlePageClick = (page) => {
-        setCurrentPage(page);
-    }
-
-    const pageNumbers = [];
-    for (let i = 1; i <= totalPages; i++) {
-        pageNumbers.push(i)
-    }
-
-    const openModal = (movie) => {
-        setSelectedMovie(movie)
-        setPageClass('main blur-content')
-    }
-
-    const closeModal = () => {
-        setSelectedMovie(null)
-        setPageClass('main')
-    }
     return (
-    <>
-        <Navbar />
+        <>
+            <Navbar />
             <div className={pageClass}>
                 <div className='top-part'>
                     <h1 className='banner1'>MOVIES THAT IS YOUR RIDE OR DIE.</h1>
@@ -167,18 +140,8 @@ const Main = () => {
                     ))}
                     </ul>
                 </div>
-                {isAdmin ? null : (
-                    <div>
-                        <h2 className='banner2'>MOVIES THAT I ORDERED</h2>
-                        <div className='movie-orders'>
-                            {orders && orders.map((order, index) => (
-                                <OrderDetails key={order._id} order={order} index={index} />
-                            ))}
-                        </div>
-                    </div>
-                )}
                 <div className="search-container">
-                    <select
+                <select
                         className='filter-dropdown'
                         value={selectedYear}
                         onChange={(e) => setSelectedYear(e.target.value)}
@@ -199,45 +162,43 @@ const Main = () => {
                         ))}
                     </select>
                     <input 
-                        className='search-input'
                         type="text"
                         placeholder="Search movies..."
                         value={searchTerm}
                         onChange={handleSearch}
                     />
                 </div>
-                <div className='main-movie-container'>
-                    <div className="movie-container">
+                <div className="movie-container">
                         <div className={'movies-list'}>
                             {currentMovies.map(movie => (
                                 <div className={'movie-item'} key={movie._id} onClick={() => openModal(movie)}>
                                     <img src={`${movie.url}`} alt={movie.title} />
                                 </div>
-                            ))}  
+                                ))}  
                         </div>
-                    </div>
-                </div>
-                <div>
-                    {pageNumbers.map((number) => (
-                        <button
-                            key={number}
-                            onClick={() => handlePageClick(number)}
-                            className={currentPage === number ? 'active' : ''}
-                        >
-                            {number}
-                        </button>
-                    ))}
                 </div>
             </div>
-            {isAdmin ? selectedMovie && (
-                <AdminModal
+            <div>
+                {pageNumbers.map((number) => (
+                    <button
+                        key={number}
+                        onClick={() => handlePageClick(number)}
+                        className={currentPage === number ? 'active' : ''}
+                    >
+                        {number}
+                    </button>
+                ))}
+            </div>
+            {selectedMovie && (
+                <MovieList
                     movie={selectedMovie}
                     closeModal={closeModal} 
                     updateMovies={updateMovies}
                 />
-            ) : <MovieModal movie={selectedMovie} closeModal={closeModal} />}
-        <Footer />            
+            )}
+        <Footer />
     </>
     )
 }
-export default Main
+
+export default AdminMain;
