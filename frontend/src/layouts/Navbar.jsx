@@ -26,15 +26,16 @@ const Navbar = () => {
                 <div className="logo">
                     <img src={logo} alt="Logo" />
                 </div>
+                {isAdmin && <span>Hello, Administrator</span>}
                 <nav>
+                    {(user && !isAdmin) && (
+                        <div>
+                            <button className="accountbutton" onClick={handleAccountClick}><span>Welcome, {user.email}</span></button>
+                        </div>
+                    )}
                     {(user && isAdmin) && (
                         <div>
                             <button className="admindashboard" onClick={handleDashboardClick}>Admin Dashboard</button>
-                        </div>
-                    )}
-                    {(user && !isAdmin) && (
-                        <div>
-                            <button className="accountbutton" onClick={handleAccountClick}>Account</button>
                         </div>
                     )}
                     {user && (

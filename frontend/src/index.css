@@ -1,3 +1,7 @@
+* {
+    color: #FFF;
+}
+
 /* Modal error in order(duplicate movie) */
 .modal-error {
     position: absolute;
