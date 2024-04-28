@@ -6,6 +6,7 @@ const router = express.Router()
 router.use(authMiddleware)
 
 router.get('/', controller.getReservations)
+router.get('/admin', controller.getReservationsAdmin)
 router.get('/:id', controller.getReservation)
 router.post('/', controller.createReservation)
 router.patch('/:id', controller.updateReservation)

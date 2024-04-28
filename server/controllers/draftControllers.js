@@ -1,5 +1,36 @@
 import Drafts from '../models/draftModel.js';
+import Movies from '../models/moviesModel.js';
 import mongoose from 'mongoose';
+
+export const publishDraft = async (req, res) => {
+    const { id } = req.params
+    try {
+        const draft = await Drafts.findById(id)
+        if (!draft) {
+            return res.status(404).json({ error: 'Tokio drafto nėra.' })
+        }
+        
+        const newMovie = new Movies({
+            status: 'published',
+            url: draft.url,
+            title: draft.title,
+            description: draft.description,
+            release_year: draft.release_year,
+            genres: draft.genres,
+            imdb_rating: draft.imdb_rating,
+            director: draft.director,
+            cast: draft.cast
+        })
+        
+        const savedMovie = await newMovie.save()
+
+        await Drafts.findByIdAndDelete(id)
+
+        res.status(200).json(savedMovie)
+    } catch (error) {
+        res.status(500).json({ error: 'Serverio klaida.' })
+    }
+}
 
 
 // GET - paimti visus movie...
@@ -31,7 +62,6 @@ export const createDraft = async (req, res) => {
     let emptyFields = []
 
     if(!title) {emptyFields.push('title')}
-    if(!short_description) {emptyFields.push('short_description')}
     if(!description) {emptyFields.push('description')}
     if(!release_year) {emptyFields.push('release_year')}
     if(!genres) {emptyFields.push('genres')}
@@ -60,7 +90,7 @@ export const updateDraft = async (req, res) => {
     if(!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: 'Tokio filmo nėra.'})
     }
-    const draftas = await Movies.findOneAndUpdate({_id: id}, {...req.body})
+    const draftas = await Drafts.findOneAndUpdate({_id: id}, {...req.body})
     if(!draftas) {
         return res.status(404).json({error: 'Tokio filmo nėra.'})
     }

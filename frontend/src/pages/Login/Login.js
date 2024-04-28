@@ -1,22 +1,23 @@
 import { useState } from "react"
-import { useLogin } from "../hooks/useLogin.js"
+import { useLogin } from "./useLogin.js"
 import { useNavigate } from "react-router-dom"
 
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const {login, isLoading, error} = useLogin()
+    const {login, error} = useLogin()
     const navigate = useNavigate()
+    
+    const handleSignUpClick = () => {
+        navigate('/signup');
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         await login(email, password)
+        setEmail('')
+        setPassword('')
     }
-
-    const handleSignUpClick = () => {
-        navigate('/signup');
-    }
-    
     return (
         <div className="login_div">
             <div className="kasete">
@@ -42,13 +43,13 @@ const Login = () => {
                             value={password}
                         />
                     </div>
-                        <button type="submit" className="login_navig button" disabled={isLoading}>LOGIN</button>
+                        <button type="submit" className="login_navig button">LOGIN</button>
                         {error && <div className="error_warning">{error}</div>}
                 </form>
                 <button className="signup_navig button" onClick={handleSignUpClick}>SIGN UP</button>
             </div>
         </div>
-    );
+    )
 }
  
 export default Login;

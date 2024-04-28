@@ -9,6 +9,6 @@ router.get('/:id', controller.getDraft)
 router.post('/', controller.createDraft)
 router.patch('/:id', controller.updateDraft)
 router.delete('/:id', controller.deleteDraft)
-
+router.patch('/publish/:id', controller.publishDraft)
 
 export default router

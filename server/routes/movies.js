@@ -1,9 +1,7 @@
 import express from 'express';
 import * as controller from '../controllers/controller.js';
 
-
 const router = express.Router()
-
 
 router.get('/', controller.getMovies) 
 router.get('/:id', controller.getMovie) 

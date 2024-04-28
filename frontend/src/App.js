@@ -1,36 +1,23 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import loadingImage from './200w.gif'
-import Login from './components/Login.js'
-import Signup from './components/Signup.js'
+import Login from './pages/Login/Login.js'
+import Signup from './pages/Signup/Signup.js'
 import Main from './pages/Main.jsx'
-import Error from './components/Error.js'
-import Complete from './components/Complete.js'
-import AdminDashboard from './components/AdminDashboard.js'
+import Error from './pages/Error.js'
+import Complete from './pages/Complete.js'
+import AdminDashboard from './pages/AdminDashboard.js'
+import UserDashboard from './pages/UserDashboard.js'
 import { useAuthContext } from './hooks/useAuthContext.js'
+import AdminReservationList from './components/AdminReservationList.js';
 
 
 function App() {
-  const [loading, setLoading] = useState(true)
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setLoading(false);
-    }, 1500)
-  
-    return () => clearTimeout(timeout)
-  }, [])
   const {user} = useAuthContext()
+  const isAdmin = user && user.role === 'admin'
+  
   return (
     <>
       <div className="App">
-        {/* Jei pages(bet kuris) loadinasi uždės image */}
-        {loading && (
-          <div className='loading-gif'>
-            <img src={loadingImage} alt="Loading Cage" />
-          </div>
-        )}
-        {/* WIP, reikės pačekint ar galiu palikti tuščią class'ę div'ui, nes nenoriu perpildyti kodo nereikalingom clasėm */}
-        <div className={(loading ? 'blur-content' : 'inner-container')}>
+        <div className={'inner-container'}>
         <BrowserRouter>
           <div className="pages">
             <Routes>
@@ -40,19 +27,27 @@ function App() {
               />
               <Route 
                 path='/login'
-                element={!user ? <Login /> : <Navigate to="/" />}
+                element={!user ? <Login/> : <Navigate to="/" />}
               />
               <Route 
                 path='/signup'
-                element={!user ? <Signup /> : <Navigate to="/" />}
+                element={!user ? <Signup/> : <Navigate to="/" />}
               />
               <Route
                 path='/admindashboard'
-                element={<AdminDashboard />}
+                element={isAdmin ? <AdminDashboard /> : <Navigate to="/" />}
               />
               <Route 
+                path='/account'
+                element={user ? <UserDashboard /> : <Navigate to="/login" />}
+              />
+              <Route
+                  path='/admin-reservations'
+                  element={isAdmin ? <AdminReservationList /> : <Navigate to="/" />}
+                />
+              <Route 
                 path='/complete'
-                element={<Complete />}
+                element={user ? <Complete /> : <Navigate to="/login" />}
               />
               <Route 
                 path='*'

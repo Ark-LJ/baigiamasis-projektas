@@ -1,20 +1,22 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import AddMovieForm from './AddMovieForm.js'
-import AdminMovieModal from './AdminMovieModal.jsx'
-import Footer from '../components/Footer.jsx'
-import Navbar from '../components/Navbar.jsx'
-import star from '../pages/movies/star2.png'
-import top from '../pages/movies/start.png'
+import MovieList from '../components/MovieList.js'
+import Footer from '../layouts/Footer.jsx'
+import Navbar from '../layouts/Navbar.jsx'
+import star from '../pages/bgImages/star2.png'
+import top from '../pages/bgImages/start.png'
 
-const AdminDashboard = () => {
+const AdminMain = () => {
     const [movies, setMovies] = useState([])
     const [selectedMovie, setSelectedMovie] = useState(null)
-    const [searchTerm, setSearchTerm] = useState('');
-    const [currentPage, setCurrentPage] = useState(1);
+    const [searchTerm, setSearchTerm] = useState('')
+    const [currentPage, setCurrentPage] = useState(1)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [pageClass, setPageClass] = useState('movies')
-    const moviesPerPage = 12;
+    const [recommendedMovies, setRecommendedMovies] = useState([])
+    const [selectedGenre, setSelectedGenre] = useState('')
+    const [selectedYear, setSelectedYear] = useState('')
+    const moviesPerPage = 12
 
     useEffect(() => {
         const fetchMovies = async () => {
@@ -28,9 +30,30 @@ const AdminDashboard = () => {
 
         fetchMovies()
     }, [])
-
-    const handleCreateMovie = (formData) => {
-        setMovies([...movies, formData])
+    const genres = [
+        'Action',
+        'Adventure',
+        'Animation',
+        'Comedy',
+        'Crime',
+        'Documentary',
+        'Drama',
+        'Family',
+        'Fantasy',
+        'History',
+        'Horror',
+        'Music',
+        'Mystery',
+        'Romance',
+        'Science Fiction',
+        'Thriller',
+        'War',
+        'Western'
+    ];
+    
+    const years = [];
+    for (let year = 1970; year <= 2024; year++) {
+        years.push(year.toString());
     }
 
     const handleSearch = (e) => {
@@ -38,7 +61,9 @@ const AdminDashboard = () => {
     }
 
     const filteredMovies = movies.filter((movie) =>
-        movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+        movie.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        (selectedGenre === '' || movie.genres.includes(selectedGenre)) &&
+        (selectedYear === '' || movie.release_year === selectedYear)
     )
 
     const indexOfLastMovie = currentPage * moviesPerPage
@@ -81,6 +106,22 @@ const AdminDashboard = () => {
         }
     }
 
+    useEffect(() => {
+        async function fetchRecommendedMovies() {
+            try {
+                const response = await fetch('/api/recomendation?sortBy=imdb_rating&limit=5')
+                if (!response.ok) {
+                    throw new Error('Failed to fetch recommended movies')
+                }
+                const recommendedMoviesData = await response.json()
+                setRecommendedMovies(recommendedMoviesData)
+            } catch (error) {
+                console.error('Error fetching recommended movies:', error)
+            }
+        }
+        fetchRecommendedMovies()
+    }, [])
+
     return (
         <>
             <Navbar />
@@ -92,18 +133,34 @@ const AdminDashboard = () => {
                 </div>
                 <div className='movie-top'>
                     <ul className='movie-recomended'>
-                        <li ><strong className='number'>#1</strong>Schindler's List</li>
-                        <li ><strong className='number'>#2</strong>Toy Story</li>
-                        <li ><strong className='number'>#3</strong>Titanic</li>
-                        <li ><strong className='number'>#4</strong>Men in Black</li>
-                        <li ><strong className='number'>#5</strong>Forrest Gump</li>
+                    {recommendedMovies.map((movie, index) => (
+                        <li key={movie._id}>
+                            <strong className='number'>#{index + 1}</strong>{movie.title}
+                        </li>
+                    ))}
                     </ul>
                 </div>
-                <AddMovieForm onSubmit={handleCreateMovie} />
                 <div className="search-container">
-                    <button className='get-movies'>
-                        All Movies
-                    </button>
+                <select
+                        className='filter-dropdown'
+                        value={selectedYear}
+                        onChange={(e) => setSelectedYear(e.target.value)}
+                    >
+                        <option value="">Years</option>
+                        {years.map((year, id) => (
+                            <option key={id} value={year}>{year}</option>
+                        ))}
+                    </select>
+                    <select
+                        className='filter-dropdown'
+                        value={selectedGenre}
+                        onChange={(e) => setSelectedGenre(e.target.value)}
+                    >
+                        <option value="">Genres</option>
+                        {genres.map((genre, id) => (
+                            <option key={id} value={genre}>{genre}</option>
+                        ))}
+                    </select>
                     <input 
                         type="text"
                         placeholder="Search movies..."
@@ -115,7 +172,7 @@ const AdminDashboard = () => {
                         <div className={'movies-list'}>
                             {currentMovies.map(movie => (
                                 <div className={'movie-item'} key={movie._id} onClick={() => openModal(movie)}>
-                                    <img src={`${movie.url}`} alt="movie_banner" />
+                                    <img src={`${movie.url}`} alt={movie.title} />
                                 </div>
                                 ))}  
                         </div>
@@ -133,7 +190,7 @@ const AdminDashboard = () => {
                 ))}
             </div>
             {selectedMovie && (
-                <AdminMovieModal
+                <MovieList
                     movie={selectedMovie}
                     closeModal={closeModal} 
                     updateMovies={updateMovies}
@@ -144,4 +201,4 @@ const AdminDashboard = () => {
     )
 }
 
-export default AdminDashboard;
+export default AdminMain;

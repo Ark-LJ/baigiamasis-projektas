@@ -44,7 +44,7 @@ export const createMovie = async (req, res) => {
 
     try {
         // const user_id = req.user._id
-        const filmas = await Movies.create({url, title, description, short_description, release_year, genres, imdb_rating, director, cast})
+        const filmas = await Movies.create({url, title, description, release_year, genres, imdb_rating, director, cast})
         res.status(200).json(filmas)
     } catch(error) {
         res.status(400).json({error: error.message})
@@ -54,7 +54,7 @@ export const createMovie = async (req, res) => {
 
 // PATCH - redaguoti vieną movie...
 export const updateMovie = async (req, res) => {
-    const {id} = req.body
+    const {id} = req.params
     if(!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: 'Tokio filmo nėra.'})
     }

@@ -2,31 +2,31 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const MovieList = ({ handleEdit }) => {
-    const [movies, setMovies] = useState([]);
-    const [selectedMovie, setSelectedMovie] = useState(null);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [currentPage, setCurrentPage] = useState(1);
-    const moviesPerPage = 12;
+    const [movies, setMovies] = useState([])
+    const [selectedMovie, setSelectedMovie] = useState(null)
+    const [searchTerm, setSearchTerm] = useState('')
+    const [currentPage, setCurrentPage] = useState(1)
+    const moviesPerPage = 12
 
     useEffect(() => {
         const fetchMovies = async () => {
             try {
-                const response = await axios.get('/api/movies')
+                const response = await axios.get('/api/drafts')
                 setMovies(response.data)
             } catch (error) {
                 console.error('Failed to fetch movies:', error)
             }
         }
 
-        fetchMovies();
+        fetchMovies()
     }, [])
 
     const handleSelectMovie = (movie) => {
-        setSelectedMovie(movie);
+        setSelectedMovie(movie)
     }
 
     const handleCloseDetails = () => {
-        setSelectedMovie(null);
+        setSelectedMovie(null)
     }
 
     const handleSearch = (e) => {
@@ -45,7 +45,7 @@ const MovieList = ({ handleEdit }) => {
 
     const handleNextPage = () => {
         setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))
-    };
+    }
 
     const handlePrevPage = () => {
         setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))
@@ -53,7 +53,7 @@ const MovieList = ({ handleEdit }) => {
 
     return (
         <div>
-            <h2>Movies List</h2>
+            <h3>Drafts List</h3>
             <input
                 type="text"
                 placeholder="Search movies..."
@@ -63,8 +63,7 @@ const MovieList = ({ handleEdit }) => {
             <ul>
                 {currentMovies.map((movie) => (
                     <li key={movie._id} onClick={() => handleSelectMovie(movie)}>
-                                                        {/* ************************ Nuimti stiliu ************************ */}
-                        <img src={movie.url} alt="Viršelis" style={{ width: '200px', height: '300px', objectFit: 'cover' }} />
+                        <img src={movie.url} alt="Cover" style={{ width: '200px', height: '300px', objectFit: 'cover' }} />
                         <h3>{movie.title} {movie.release_year}</h3>
                         <p>Status: {movie.status}</p>
                     </li>
@@ -76,7 +75,6 @@ const MovieList = ({ handleEdit }) => {
             </div>
             {selectedMovie && (
                 <div>
-                                                             {/* ************************ Nuimti stiliu ************************ */}
                     <img src={selectedMovie.url} alt="Viršelis" style={{ width: '200px', height: '300px', objectFit: 'cover' }} />
                     <h3>{selectedMovie.title}</h3>
                     <p>Release year: {selectedMovie.release_year}</p>

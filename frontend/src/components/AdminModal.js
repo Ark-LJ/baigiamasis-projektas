@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const AdminMovieModal = ({ movie, closeModal, updateMovies }) => {
+const AdminModal = ({ movie, closeModal, updateMovies }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editedMovie, setEditedMovie] = useState({
-        status: movie.status,
         url: movie.url,
         title: movie.title,
         release_year: movie.release_year,
@@ -26,11 +25,11 @@ const AdminMovieModal = ({ movie, closeModal, updateMovies }) => {
     const handleEditSubmit = async () => {
         try {
             await axios.patch(`/api/movies/${movie._id}`, editedMovie)
-            closeModal();
+            closeModal()
         } catch (error) {
             console.error('Failed to update movie:', error)
         }
-    };
+    }
 
     const handleDelete = async () => {
         try {
@@ -54,18 +53,18 @@ const AdminMovieModal = ({ movie, closeModal, updateMovies }) => {
                         {isEditing ? (
                             <div className='contents-container'>
                                 <div>
-                                    <p>Status</p>
+                                    <p>Url</p>
                                     <input
                                         type="text"
-                                        name="release_year"
-                                        value={editedMovie.status}
+                                        name="url"
+                                        value={editedMovie.url}
                                         onChange={handleInputChange}
                                     />
                                 </div>
                                 <div>
                                     <p>Year</p>
                                     <input
-                                        type="text"
+                                        type="number"
                                         name="release_year"
                                         value={editedMovie.release_year}
                                         onChange={handleInputChange}
@@ -92,7 +91,7 @@ const AdminMovieModal = ({ movie, closeModal, updateMovies }) => {
                                 <div>
                                     <p>IMDB</p>
                                     <input
-                                        type="text"
+                                        type="number"
                                         name="imdb_rating"
                                         value={editedMovie.imdb_rating}
                                         onChange={handleInputChange}
@@ -163,4 +162,4 @@ const AdminMovieModal = ({ movie, closeModal, updateMovies }) => {
     )
 }
 
-export default AdminMovieModal
+export default AdminModal
