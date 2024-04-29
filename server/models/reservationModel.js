@@ -13,6 +13,10 @@ const reservationSchema = new Schema({
         type: Date,
         required: true
     },
+    user_email: {
+        type: String,
+        required: true
+    },
     status: {
         type: [String],
         required: true,

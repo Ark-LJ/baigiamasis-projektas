@@ -24,27 +24,26 @@ const Navbar = () => {
         <header>
             <div className="container">
                 <div className="logo">
-                    <img src={logo} alt="Logo" />
+                    <img src={logo} alt="Logo" style={{width: '150%'}}/>
                 </div>
-                {isAdmin && <span>Hello, Administrator</span>}
-                <nav>
-                    {(user && !isAdmin) && (
-                        <div>
-                            <button className="accountbutton" onClick={handleAccountClick}><span>Welcome, {user.email}</span></button>
-                        </div>
-                    )}
+                <div className="all-btn">
+                <nav className="all-btn">
                     {(user && isAdmin) && (
                         <div>
-                            <button className="admindashboard" onClick={handleDashboardClick}>Admin Dashboard</button>
+                            <button className="adminBtn" onClick={handleDashboardClick}>Admin Dashboard</button>
                         </div>
-                    )}
+                    )} 
                     {user && (
+                        <>
                         <div>
-                            <button className="mainBtn" onClick={handleReturnMainClick}>Main</button>
-                            <button className="logoutBtn" onClick={handleClick}>Log Out</button>
+                            <button className="navBtn" onClick={handleReturnMainClick}>Main</button>
                         </div>
+                            <div><button className="navBtn" onClick={handleClick}
+                            >Log Out</button></div>
+                        </>
                     )}
                 </nav>
+              </div>
             </div>
         </header>
     )

@@ -30,7 +30,6 @@ export const getReservation = async (req, res) => {
 // POST - sukurti rezervacija
 export const createReservation = async (req, res) => {
     const {user_email, movie_id, pickup_date, pickup_location} = req.body
-
     let emptyFields = []
 
     if (!movie_id) {emptyFields.push('movie_id')}
@@ -48,7 +47,7 @@ export const createReservation = async (req, res) => {
     } catch(error) {
         res.status(400).json({message: "Error creating reservation", error: error.toString()})
     }
-    }
+}
 
 
 // PATCH - pakoreguoti rezervacija

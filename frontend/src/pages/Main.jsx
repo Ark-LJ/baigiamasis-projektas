@@ -18,8 +18,10 @@ const Main = () => {
     const [recommendedMovies, setRecommendedMovies] = useState([])
     const [selectedGenre, setSelectedGenre] = useState('')
     const [selectedYear, setSelectedYear] = useState('')
-    const moviesPerPage = 12
-
+    const moviesPerPage = 10
+    const maxDisplayedPages = 4
+    const maxPagesToShowOnEachSide = 2
+    const firstPage = 1
     const {orders, dispatch} = useOrderContext()
     const {user} = useAuthContext()
     const isAdmin = user && user.role === 'admin'
@@ -121,7 +123,7 @@ const Main = () => {
     const filteredMovies = movies.filter((movie) =>
         movie.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
         (selectedGenre === '' || movie.genres.includes(selectedGenre)) &&
-        (selectedYear === '' || movie.release_year === selectedYear)
+        (selectedYear === '' || movie.release_year.toString() === selectedYear.toString())
     )
 
 
@@ -130,9 +132,9 @@ const Main = () => {
     const currentMovies = filteredMovies.slice(indexOfFirstMovie, indexOfLastMovie)
 
     const totalPages = Math.ceil(filteredMovies.length / moviesPerPage)
-
+    const lastPage = totalPages
     const handlePageClick = (page) => {
-        setCurrentPage(page);
+        setCurrentPage(page)
     }
 
     const pageNumbers = [];
@@ -149,22 +151,73 @@ const Main = () => {
         setSelectedMovie(null)
         setPageClass('main')
     }
+    const renderPageNumbers = () => {
+        const renderRange = (start, end) => {
+            const pages = [];
+            for (let i = start; i <= end; i++) {
+                pages.push(
+                    <button
+                        key={i}
+                        onClick={() => handlePageClick(i)}
+                        className={currentPage === i ? 'button-active' : 'button-active'}
+                    >
+                        {i}
+                    </button>
+                )
+            }
+            return pages
+        }
+
+        if (totalPages <= maxDisplayedPages) {
+            return renderRange(firstPage, lastPage)
+        } else {
+            let pagesToShow = []
+            const leftSidePages = Math.min(maxPagesToShowOnEachSide, currentPage - firstPage)
+            const rightSidePages = Math.min(maxPagesToShowOnEachSide, lastPage - currentPage)
+
+            pagesToShow = [
+                ...renderRange(
+                    Math.max(firstPage, currentPage - maxDisplayedPages + 1 + rightSidePages),
+                    Math.min(lastPage, currentPage + maxDisplayedPages - 1 - leftSidePages)
+                )
+            ]
+
+            if (currentPage - maxDisplayedPages + 1 > firstPage) {
+                pagesToShow.unshift('...');
+                pagesToShow.unshift(
+                    <button key={firstPage} className='button-active' onClick={() => handlePageClick(firstPage)}>
+                        {firstPage}
+                    </button>
+                );
+            }
+            if (currentPage + maxDisplayedPages - 1 < lastPage) {
+                pagesToShow.push('...');
+                pagesToShow.push(
+                    <button key={lastPage} className='button-active' onClick={() => handlePageClick(lastPage)}>
+                        {lastPage}
+                    </button>
+                )
+            }
+            return pagesToShow;
+        }
+    };
+
     return (
-    <>
-        <Navbar />
+        <>
+            <Navbar />
             <div className={pageClass}>
                 <div className='top-part'>
-                    <h1 className='banner1'>MOVIES THAT IS YOUR RIDE OR DIE.</h1>
+                    <h1 className='banner1'>MOVIES THAT ARE YOUR RIDE OR DIE.</h1>
                     <img src={top} className='star' alt="movie_banner" />
                     <img src={star} className='star2' alt="movie_banner" />
                 </div>
                 <div className='movie-top'>
                     <ul className='movie-recomended'>
-                    {recommendedMovies.map((movie, index) => (
-                        <li key={movie._id}>
-                            <strong className='number'>#{index + 1}</strong>{movie.title}
-                        </li>
-                    ))}
+                        {recommendedMovies.map((movie, index) => (
+                            <li key={movie._id}>
+                                <strong className='number'>#{index + 1}</strong>{movie.title}
+                            </li>
+                        ))}
                     </ul>
                 </div>
                 {isAdmin ? null : (
@@ -178,8 +231,8 @@ const Main = () => {
                     </div>
                 )}
                 <div className="search-container">
-                    <select
-                        className='filter-dropdown'
+                    {/* <select
+                        className='get-movies'
                         value={selectedYear}
                         onChange={(e) => setSelectedYear(e.target.value)}
                     >
@@ -187,9 +240,9 @@ const Main = () => {
                         {years.map((year, id) => (
                             <option key={id} value={year}>{year}</option>
                         ))}
-                    </select>
+                    </select> */}
                     <select
-                        className='filter-dropdown'
+                        className='get-movies'
                         value={selectedGenre}
                         onChange={(e) => setSelectedGenre(e.target.value)}
                     >
@@ -199,7 +252,7 @@ const Main = () => {
                         ))}
                     </select>
                     <input 
-                        className='search-input'
+                        className='get-search get-movies'
                         type="text"
                         placeholder="Search movies..."
                         value={searchTerm}
@@ -217,16 +270,8 @@ const Main = () => {
                         </div>
                     </div>
                 </div>
-                <div>
-                    {pageNumbers.map((number) => (
-                        <button
-                            key={number}
-                            onClick={() => handlePageClick(number)}
-                            className={currentPage === number ? 'active' : ''}
-                        >
-                            {number}
-                        </button>
-                    ))}
+                <div className='pages-button'>
+                    {renderPageNumbers()}
                 </div>
             </div>
             {isAdmin ? selectedMovie && (
@@ -236,8 +281,8 @@ const Main = () => {
                     updateMovies={updateMovies}
                 />
             ) : <MovieModal movie={selectedMovie} closeModal={closeModal} />}
-        <Footer />            
-    </>
+            <Footer />            
+        </>
     )
 }
 export default Main

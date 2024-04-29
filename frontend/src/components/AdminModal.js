@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import '../modalStyles.css';
 
 const AdminModal = ({ movie, closeModal, updateMovies }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -44,53 +45,53 @@ const AdminModal = ({ movie, closeModal, updateMovies }) => {
     if (!movie) return null
 
     return (
-        <div className="modal">
-            <div className="modal-content">
+        <div className="modal admin-modal">
+            <div className="modal-content admin-modal-content">
                 <div className='modal-top'>
-                    <img src={`${movie.url}`} alt="movie_banner" />
-                    <div className='text-container'>
+                    <img className='form-img' src={`${movie.url}`} alt="movie_banner" />
+                    <div className='text-container admin-text-container'>
                         <h2>{movie.title}</h2>
                         {isEditing ? (
-                            <div className='contents-container'>
-                                <div>
-                                    <p>Url</p>
-                                    <input
+                            <div className='edit-content admin-edit-content'>
+                                <div className='edit-container admin-edit-container'>
+                                    <p className="form-title">Url</p>
+                                    < input className="form-info admin-form-info"
                                         type="text"
                                         name="url"
                                         value={editedMovie.url}
                                         onChange={handleInputChange}
                                     />
                                 </div>
-                                <div>
-                                    <p>Year</p>
-                                    <input
+                                <div className='edit-container admin-edit-container'>
+                                    <p className="form-title">Year</p>
+                                    <input className="form-info admin-form-info"
                                         type="number"
                                         name="release_year"
                                         value={editedMovie.release_year}
                                         onChange={handleInputChange}
                                     />
                                 </div>
-                                <div>
-                                    <p>Genre</p>
-                                    <input
+                                <div className='edit-container admin-edit-container'>
+                                    <p className="form-title">Genre</p>
+                                    <input className="form-info admin-form-info"
                                         type="text"
                                         name="genres"
                                         value={editedMovie.genres}
                                         onChange={handleInputChange}
                                     />
                                 </div>
-                                <div>
-                                    <p>Directed By</p>
-                                    <input
+                                <div className='edit-container admin-edit-container'>
+                                    <p className="form-title">Directed By</p>
+                                    <input className="form-info admin-form-info"
                                         type="text"
                                         name="director"
                                         value={editedMovie.director}
                                         onChange={handleInputChange}
                                     />
                                 </div>
-                                <div>
-                                    <p>IMDB</p>
-                                    <input
+                                <div className='edit-container admin-edit-container'>
+                                    <p className="form-title">IMDB</p>
+                                    <input className="form-info admin-form-info"
                                         type="number"
                                         name="imdb_rating"
                                         value={editedMovie.imdb_rating}
@@ -101,60 +102,61 @@ const AdminModal = ({ movie, closeModal, updateMovies }) => {
                         ) : (
                             <div className='contents-container'>
                                 <div>
-                                    <p>Year</p>
-                                    <div>{movie.release_year}</div>
+                                    <p className="form-title">Year</p>
+                                    <div className="form-info admin-form-info">{movie.release_year}</div>
+                                    <p className="form-title">Genre</p>
+                                    <div className="form-info admin-form-info">{movie.genres.join(', ')}</div>
                                 </div>
                                 <div>
-                                    <p>Genre</p>
-                                    <div>{movie.genres.join(', ')}</div>
-                                </div>
-                                <div>
-                                    <p>Directed By</p>
-                                    <div>{movie.director.join(', ')}</div>
-                                </div>
-                                <div>
-                                    <p>IMDB</p>
-                                    <div>{movie.imdb_rating} / 10</div>
+                                    <p className="form-title">Directed By</p>
+                                    <div className="form-info admin-form-info">{movie.director.join(', ')}</div>
+                                    <p className="form-title">IMDB</p>
+                                    <div className="form-info admin-form-info">{movie.imdb_rating} / 10</div>
                                 </div>
                             </div>
                         )}
-                        <p>Cast</p>
+                        <div className='edit-container admin-edit-container'>
+                        <p className="form-title">Cast</p>
                         {isEditing ? (
-                            <input
+                            <input className="form-info admin-form-info"
                                 type="text"
                                 name="cast"
                                 value={editedMovie.cast}
                                 onChange={handleInputChange}
                             />
                         ) : (
-                            <div>{movie.cast.join(', ')}</div>
+                            <div className="form-info admin-form-info">{movie.cast.join(', ')}</div>
                         )}
-                        <p>Storyline</p>
+                        </div >
+                        <div className='edit-container admin-edit-container' >
+                        <p className="form-title">Storyline</p>
                         {isEditing ? (
-                            <textarea
+                            <textarea 
+                                className="form-info admin-form-info"
                                 name="description"
                                 value={editedMovie.description}
                                 onChange={handleInputChange}
                             />
                         ) : (
-                            <div>{movie.description}</div>
+                            <div className="form-info admin-form-info">{movie.description}</div>
                         )}
+                        </div>
                     </div>
                 </div>
                 <div className='modal-bottom'>
-                    <div className='button-container'>
+                    <div className='button-container .admin-button-container'>
                         {isEditing ? (
                             <>
-                                <button className="close" onClick={handleEditSubmit}>Submit</button>
-                                <button className="close" onClick={() => setIsEditing(false)}>Cancel</button>
+                                <button className="form-button" onClick={handleEditSubmit}>Submit</button>
+                                <button className="form-button" onClick={() => setIsEditing(false)}>Cancel</button>
                             </>
                         ) : (
                             <>
-                                <button className="close" onClick={() => setIsEditing(true)}>EDIT</button>
-                                <button className="close" onClick={handleDelete}>DELETE</button>
+                                <button className="form-button" onClick={() => setIsEditing(true)}>EDIT</button>
+                                <button className="form-button" onClick={handleDelete}>DELETE</button>
                             </>
                         )}
-                        <button className="close" onClick={closeModal}>Go Back</button>
+                        <button className="form-button" onClick={closeModal}>Go Back</button>
                     </div>
                 </div>
             </div>

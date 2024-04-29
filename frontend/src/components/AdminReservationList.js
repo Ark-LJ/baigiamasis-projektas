@@ -74,33 +74,38 @@ const AdminReservationList = () => {
     }
 
     return (
-        <div>
-            <h3>All Reservations</h3>
+
+       <div >
+        <div className='all-reservations'>
+            <h3 className='reservation-title'>All Reservations</h3>
             <ul>
                 {reservations.map((reservation, index) => (
-                    <li key={reservation._id}>
-                        <p onClick={() => handleReservationClick(reservation._id)} style={{ cursor: 'pointer' }}>
+                    <li className='reservation-form' key={reservation._id}>
+                        <div className='reservation-form-container'>
+                        <p className='reservation-form' onClick={() => handleReservationClick(reservation._id)} style={{ cursor: 'pointer' }}>
                             {selectedReservation && selectedReservation._id === reservation._id && selectedReservation.movie_title ?
                                 `The item: ${selectedReservation.movie_title}` : `Reservation #${index + 1}`}
                         </p>
-                        <p>Order status: {reservation.status}</p>
+                        <p className='reservation-form'>Order status: {reservation.status}</p>
+                        </div>
                         {selectedReservation && selectedReservation._id === reservation._id && (
                             <>
                                 <AdminReservationDetails reservation={selectedReservation} newStatus={newStatus} />
-                                <select value={newStatus} onChange={(e) => setNewStatus(e.target.value)}>
+                                <select className='reservation-btn' value={newStatus} onChange={(e) => setNewStatus(e.target.value)}>
                                     <option value="Approved">Approved</option>
                                     <option value="Rejected">Rejected</option>
                                     <option value="Progress">Progress</option>
                                     <option value="Pending">Pending</option>
                                     <option value="Completed">Completed</option>
                                 </select>
-                                <button onClick={handleStatusChange}>Update status</button>
-                                <button onClick={handleCloseDetails}>Close</button>
+                                <button className='reservation-btn' onClick={handleStatusChange}>Update status</button>
+                                <button className='reservation-btn' onClick={handleCloseDetails}>Close</button>
                             </>
                         )}
                     </li>
                 ))}
             </ul>
+            </div>
         </div>
     )
 }

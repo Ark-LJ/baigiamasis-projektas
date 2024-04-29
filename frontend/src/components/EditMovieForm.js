@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const EditMovieForm = ({ movie: initialMovie, onClose }) => {
@@ -55,12 +55,13 @@ const EditMovieForm = ({ movie: initialMovie, onClose }) => {
     }
     
     return (
-        <div>
-            <h3>Edit Movie</h3>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Title:</label>
-                    <input
+        <div className='edit-all-container' > 
+        <div className='edit-form-container'>
+            <form className='edit-form-movie' onSubmit={handleSubmit}>
+            <h3 className='form-title3' >Edit Movie</h3>
+                <div className='form-evrything'>
+                    <p className='form-title3'>Title:</p>
+                    <input className='form-info3'
                         type="text"
                         name="title"
                         value={formData ? formData.title : ''}
@@ -68,28 +69,19 @@ const EditMovieForm = ({ movie: initialMovie, onClose }) => {
                         required
                     />
                 </div>
-                <div>
-                    <label>Description:</label>
-                    <textarea
-                        name="description"
-                        value={formData ? formData.description : ''}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Director:</label>
-                    <input
-                        type="text"
+                <div lassName='form-evrything'>
+                    <p className='form-title3'>Director:</p>
+                    <input className='form-info3'
+                        type="text" 
                         name="director"
                         value={formData ? formData.director : ''}
                         onChange={handleChange}
                         required
                     />
                 </div>
-                <div>
-                    <label>Release Year:</label>
-                    <input
+                <div lassName='form-evrything'>
+                    <p className='form-title3'>Release Year:</p>
+                    <input className='form-info3'
                         type="number"
                         name="release_year"
                         value={formData ? formData.release_year : ''}
@@ -97,9 +89,9 @@ const EditMovieForm = ({ movie: initialMovie, onClose }) => {
                         required
                     />
                 </div>
-                <div>
-                    <label>Genres:</label>
-                    <input
+                <div lassName='form-evrything'>
+                    <p className='form-title3'>Genres:</p>
+                    <input className='form-info3'
                         type="text"
                         name="genres"
                         value={formData ? formData.genres : ''}
@@ -107,9 +99,9 @@ const EditMovieForm = ({ movie: initialMovie, onClose }) => {
                         required
                     />
                 </div>
-                <div>
-                    <label>imdb:</label>
-                    <input
+                <div lassName='form-evrything'>
+                    <p className='form-title3'>imdb:</p>
+                    <input className='form-info3'
                         type="number"
                         name="imdb_rating"
                         value={formData ? formData.imdb_rating : ''}
@@ -117,9 +109,9 @@ const EditMovieForm = ({ movie: initialMovie, onClose }) => {
                         required
                     />
                 </div>
-                <div>
-                    <label>Cast:</label>
-                    <input
+                <div lassName='form-evrything'>
+                    <p className='form-title3'>Cast:</p>
+                    <input className='form-info3'
                         type="text"
                         name="cast"
                         value={formData ? formData.cast : ''}
@@ -127,20 +119,20 @@ const EditMovieForm = ({ movie: initialMovie, onClose }) => {
                         required
                     />
                 </div>
-                <div>
-                    <label>URL:</label>
-                    <input
+                <div lassName='form-evrything'>
+                    <p className='form-title3'>URL:</p>
+                    <input className='form-info3'
                         type="text"
                         name="url"
                         value={formData ? formData.url : ''}
                         onChange={handleChange}
                         required
                     />
-                </div>
+                </div >
                 {showStatusOptions && (
-                    <div>
-                        <label>Status:</label>
-                        <select
+                    <div lassName='form-evrything'>
+                        <p className='form-title3'>Status:</p>
+                        <select className='form-info3'
                             name="status"
                             value={formData ? formData.status : ''}
                             onChange={handleChange}
@@ -151,20 +143,30 @@ const EditMovieForm = ({ movie: initialMovie, onClose }) => {
                         </select>
                     </div>
                 )}
+                 <div lassName='form-evrything'> 
+                    <p className='form-title3'>Description:</p>
+                    <textarea className='form-info3'
+                        name="description"
+                        value={formData ? formData.description : ''}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
                 {confirmDialog ? (
                     <div>
                         <p>Are you sure you want to change the status?</p>
-                        <button onClick={handleConfirmStatusChange}>Yes</button>
-                        <button onClick={handleCancelStatusChange}>No</button>
+                        <button className='admin-submit' onClick={handleConfirmStatusChange}>Yes</button>
+                        <button className='admin-submit' onClick={handleCancelStatusChange}>No</button>
                     </div>
                 ) : (
                     <div>
-                        <button type="button" onClick={handleStatusChange}>Save</button>
-                        <button type="button" onClick={handleClose}>Close</button>
+                        <button className='edit-form-btn' type="button" onClick={handleStatusChange}>Save</button>
+                        <button  className='edit-form-btn' type="button" onClick={handleClose}>Close</button>
                     </div>
                 )}
             </form>
         </div>
+    </div>
     )
 }
 

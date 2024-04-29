@@ -89,7 +89,7 @@ const OrderDetails = ({ order, index }) => {
         }
     }
     return (
-        <>
+        <> 
             <ul className="ordered-list">
                 <li className='ordered-list-item'>
                     <div className='movie-split'>
@@ -98,12 +98,12 @@ const OrderDetails = ({ order, index }) => {
                     </div>
                     {edit ? (
                         <>
-                            <DatePicker
+                            <DatePicker className="get-movies"
                                 selected={selectedDate}
                                 onChange={handleDateChange}
                                 minDate={new Date()}
                             />
-                            <select value={selectedLocation} onChange={handleLocationChange}>
+                            <select className="get-movies" value={selectedLocation} onChange={handleLocationChange}>
                                 <option value="">Select Pickup Location</option>
                                 {pickupLocations.map((location, id) => (
                                     <option key={id} value={location}>{location}</option>
@@ -120,12 +120,22 @@ const OrderDetails = ({ order, index }) => {
                             <span className="selected-location">{selectedLocation}</span>
                         </>
                     )}
-                    <div>
+                    <span className="movie-name">{order.status}</span>
+                    {order.status.toString() === ('Pending') ?
+                    <div className="all-order-btn1" >
                         <button className="btn-1" onClick={edit ? handleSaveEdit : handleEditClick}>
                             {edit ? 'Save' : 'Edit order'}
                         </button>
                         <button className="btn-1" onClick={handleClick}>Delete</button>
                     </div>
+                    :
+                    <div className="all-order-btn1" >
+                        <button className="btn-1" disabled>
+                            Edit order
+                        </button>
+                        <button className="btn-1" disabled>Delete</button>
+                    </div>
+                    }
                 </li>
             </ul>
         </>
