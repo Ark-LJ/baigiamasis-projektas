@@ -17,9 +17,6 @@ const Navbar = () => {
     const handleReturnMainClick = () => {
         navigate('/')
     }
-    const handleAccountClick = () => {
-        navigate('/account')
-    }
     return (
         <header>
             <div className="container">
