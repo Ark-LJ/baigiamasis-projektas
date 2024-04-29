@@ -12,8 +12,8 @@ describe('Login Page', () => {
   });
 
   it('Atvaizduojama klaida kai vartotojas iveda netinkama slaptazodi', () => {
-    cy.get('input[type="email"]').type('eligijus999@gmail.com');
-    cy.get('input[type="password"]').type('Testinag1!');
+    cy.get('input[type="email"]').type('NormalUser1@gmail.com');
+    cy.get('input[type="password"]').type('NormalUser1@gmail.com2');
     cy.get('button[type="submit"]').click();
     cy.get('.error_warning').should('contain', 'Neteisingas slaptažodis')
   });
@@ -26,8 +26,8 @@ describe('Login Page', () => {
   });
 
   it('Vartotojas sekmingai prijungiamas ir token generuojamas', () => {
-    cy.get('input[type="email"]').type('eligijus999@gmail.com');
-    cy.get('input[type="password"]').type('Testing1!');
+    cy.get('input[type="email"]').type('NormalUser1@gmail.com');
+    cy.get('input[type="password"]').type('NormalUser1@gmail.com');
     cy.intercept('POST', '/api/user/login').as('loginRequest');
     cy.get('form').submit();
     cy.wait('@loginRequest').its('response.statusCode').should('eq', 200);

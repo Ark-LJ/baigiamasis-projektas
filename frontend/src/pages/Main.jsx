@@ -17,7 +17,7 @@ const Main = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [recommendedMovies, setRecommendedMovies] = useState([])
     const [selectedGenre, setSelectedGenre] = useState('')
-    // const [selectedYear, setSelectedYear] = useState('')
+    const [selectedYear, setSelectedYear] = useState('')
     const moviesPerPage = 12
     const maxDisplayedPages = 4
     const maxPagesToShowOnEachSide = 2
@@ -47,10 +47,10 @@ const Main = () => {
         'Western'
     ]
     
-    // const years = [];
-    // for (let year = 1970; year <= 2024; year++) {
-    //     years.push(year.toString())
-    // }
+    const years = [];
+    for (let year = 1970; year <= 2024; year++) {
+        years.push(year.toString())
+    }
 
     const updateMovies = async () => {
         try {
@@ -122,8 +122,8 @@ const Main = () => {
     }
     const filteredMovies = movies.filter((movie) =>
         movie.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        (selectedGenre === '' || movie.genres.includes(selectedGenre))
-        // && (selectedYear === '' || movie.release_year === selectedYear)
+        (selectedGenre === '' || movie.genres.includes(selectedGenre)) &&
+        (selectedYear === '' || movie.release_year?.toString() === selectedYear.toString())
     )
 
 
@@ -231,7 +231,7 @@ const Main = () => {
                     </div>
                 )}
                 <div className="search-container">
-                    {/* <select
+                    <select
                         className='get-movies'
                         value={selectedYear}
                         onChange={(e) => setSelectedYear(e.target.value)}
@@ -240,7 +240,7 @@ const Main = () => {
                         {years.map((year, id) => (
                             <option key={id} value={year}>{year}</option>
                         ))}
-                    </select> */}
+                    </select>
                     <select
                         className='get-movies'
                         value={selectedGenre}

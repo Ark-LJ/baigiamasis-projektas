@@ -2,8 +2,8 @@ describe('Admin Testing', () => {
     beforeEach(() => {
         cy.visit('http://localhost:3000');
         cy.viewport(1820, 1080)
-        cy.get('input[type="email"]').type('Administrator2@movie.time.com');
-        cy.get('input[type="password"]').type('Administrator2@movie.time.com');
+        cy.get('input[type="email"]').type('Admin1@movie.time.com');
+        cy.get('input[type="password"]').type('Admin1@movie.time.com');
         cy.get('form').submit();
         })
 
