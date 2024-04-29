@@ -14,7 +14,7 @@ export const getRecommendedMovies = async (req, res) => {
                     return ['genres', 1]
                 case 'rating':
                     return ['imdb_rating', -1]
-                case 'rating':
+                case 'year':
                     return ['release_year', -1]
                 default:
                     return [option, -1]

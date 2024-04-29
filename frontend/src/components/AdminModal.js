@@ -132,7 +132,7 @@ const AdminModal = ({ movie, closeModal, updateMovies }) => {
                         <p className="form-title">Storyline</p>
                         {isEditing ? (
                             <textarea 
-                                className="form-info admin-form-info"
+                                className="form-info admin-form-info storyline-size"
                                 name="description"
                                 value={editedMovie.description}
                                 onChange={handleInputChange}

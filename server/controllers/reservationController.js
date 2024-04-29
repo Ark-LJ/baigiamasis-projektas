@@ -6,12 +6,10 @@ export const getReservations = async (req, res) => {
     const user_id = req.user._id
     const reservations = await Reservation.find({user_id}).sort({createdAt: 1})
     res.status(200).json(reservations)
-    console.log(reservations)
 }
 export const getReservationsAdmin = async (req, res) => {
     const reservations = await Reservation.find({}).sort({createdAt: 1})
     res.status(200).json(reservations)
-    console.log(reservations)
 }
 
 // GET - paimti viena userio rezervation

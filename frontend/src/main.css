@@ -1,8 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bungee&family=Cambay:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
+
 .movie-item img {
     color: #ffffff;
+}
+
+.movie-item {
+    min-width: 270px;
+    text-align: center;
 }
 
 body {
@@ -68,7 +74,7 @@ border-radius: 20px;
 }
 
 .all-btn {
-    display: flex; 
+    display: flex;
 }
 
 .logoutBtn:hover {
@@ -116,6 +122,8 @@ right:300px;
 
 }
 .movie-recomended {
+    display: flex;
+    flex-direction: column;
     padding: 0;
     margin: 0 80px;
 }
@@ -150,7 +158,7 @@ border: 4px solid #78F7FA;
 filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 height: 60px;
 font-size: 24px;
-margin: 20px;
+margin: 0 0 20px;
 padding-left:20px;
 padding-right:20px;
 width: 700px;
@@ -159,14 +167,14 @@ color:#ffffff;
 
 
 .number { 
-font-size: 14px;
+font-size: 20px;
 padding: 15px;
 color: #FFDD4F;
 
 }
 
 .star2 {
-position: absolute;
+  position: absolute;
   top: 50px;
   left:680px;
 }
@@ -240,7 +248,18 @@ padding: 0;
 display: flex;
 justify-content: space-between;
 align-items: center;
-} 
+font-size: 18px;
+}
+
+.ordered-list-item span {
+    margin-left: 5px;
+    width: fit-content;
+    justify-content: center;
+}
+
+.movie-name {
+    align-content: center;
+}
 
 .ordered-list {
     margin: 0;
@@ -668,7 +687,7 @@ position:relative;
 
     .modal {
         top: 25px;
-        width: 100%;
+        /* width: 100%; */
     }
 
     .modal-content {
@@ -709,6 +728,11 @@ position:relative;
         display: flex;
         flex-direction: column;
         justify-content: center;
+    }
+
+    nav {
+        flex-direction: row;
+        align-items: center;
     }
 
     .logo {
@@ -760,13 +784,13 @@ position:relative;
 
 @media screen and (max-width: 860px) {
     .display-story{
-        display:none;;
+        display:none;
     }
     .display-directed{
-        display:none;;
+        display:none;
     }
     .display-genre{
-        display:none;;
+        display:none;
     }
     .banner1{
         font-size:80px;
@@ -778,9 +802,6 @@ position:relative;
         top:10px;
         left:380px;
 
-    }
-    .movie-recomended >li{
-        width:380px;
     }
     .movie-recomended{
         margin:20px;
@@ -977,7 +998,7 @@ position:relative;
     .movie-recomended >li{
         width:220px;
         height: auto;
-        font-size:15px;
+        font-size: 15px;
     }
 
     .edit-form-movie {
@@ -999,6 +1020,7 @@ position:relative;
    }
 
    .modal {
+    top: 200px;
     right: 120px;
    }
 

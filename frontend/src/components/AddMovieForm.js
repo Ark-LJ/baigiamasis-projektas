@@ -22,6 +22,7 @@ const AddMovieForm = ({ onSubmit }) => {
     }
 
     const handleSubmit = async (e) => {
+        e.preventDefault()
         const apiEndpoint = formData.status === 'draft' ? '/api/drafts' : '/api/movies';
         try {
             await axios.post(apiEndpoint, formData)
@@ -165,9 +166,6 @@ const AddMovieForm = ({ onSubmit }) => {
    <div className='modal-content-admin '>
         <p className="text-container-title">Add New Movie</p>
        <form className="text-container-admin" onSubmit={handleSubmit}>
-       
-           
-        
            <div className='form-title-all' >
                <p className="form-title">Title:</p>
                <input 

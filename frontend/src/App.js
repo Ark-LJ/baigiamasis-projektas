@@ -6,7 +6,6 @@ import Error from './pages/Error.js'
 import Complete from './pages/Complete.js'
 import AdminDashboard from './pages/AdminDashboard.js'
 import { useAuthContext } from './hooks/useAuthContext.js'
-import AdminReservationList from './components/AdminReservationList.js';
 
 
 function App() {
@@ -36,10 +35,6 @@ function App() {
                 path='/admindashboard'
                 element={isAdmin ? <AdminDashboard /> : <Navigate to="/" />}
               />
-              <Route
-                  path='/admin-reservations'
-                  element={isAdmin ? <AdminReservationList /> : <Navigate to="/" />}
-                />
               <Route 
                 path='/complete'
                 element={user ? <Complete /> : <Navigate to="/login" />}

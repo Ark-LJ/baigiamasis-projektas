@@ -1,7 +1,13 @@
 .admin-modal {
     width: 80%;
+    height: 85%;
     left: 10%;
-    top: 40px;
+    z-index: 99;
+    /* top: 40px; */
+}
+
+.modal {
+    z-index: 99;
 }
 
 .admin-modal-content {
@@ -18,8 +24,15 @@
 
 .admin-form-info {
     border-radius: 20px;
+    /* height: 20px; */
 }
 
+.form-info {
+    height: 20px;
+}
+.storyline-size {
+    height: 80px;
+}
 .admin-button-container {
     display: flex;
     gap: 20px;
@@ -31,6 +44,19 @@
 
 .admin-edit-container {
     width: 100%;
+    display: flex;
 }
 
+.admin-form-info {
+    max-height: 10px;
+    overflow-y: auto;
+}
 
+.admin-modal {
+    max-height: 600px;
+}
+
+.admin-text-container h2 {
+    margin: 0;
+    line-height: 40px;
+}

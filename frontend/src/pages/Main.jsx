@@ -17,8 +17,8 @@ const Main = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [recommendedMovies, setRecommendedMovies] = useState([])
     const [selectedGenre, setSelectedGenre] = useState('')
-    const [selectedYear, setSelectedYear] = useState('')
-    const moviesPerPage = 10
+    // const [selectedYear, setSelectedYear] = useState('')
+    const moviesPerPage = 12
     const maxDisplayedPages = 4
     const maxPagesToShowOnEachSide = 2
     const firstPage = 1
@@ -47,10 +47,10 @@ const Main = () => {
         'Western'
     ]
     
-    const years = [];
-    for (let year = 1970; year <= 2024; year++) {
-        years.push(year.toString())
-    }
+    // const years = [];
+    // for (let year = 1970; year <= 2024; year++) {
+    //     years.push(year.toString())
+    // }
 
     const updateMovies = async () => {
         try {
@@ -122,8 +122,8 @@ const Main = () => {
     }
     const filteredMovies = movies.filter((movie) =>
         movie.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        (selectedGenre === '' || movie.genres.includes(selectedGenre)) &&
-        (selectedYear === '' || movie.release_year.toString() === selectedYear.toString())
+        (selectedGenre === '' || movie.genres.includes(selectedGenre))
+        // && (selectedYear === '' || movie.release_year === selectedYear)
     )
 
 

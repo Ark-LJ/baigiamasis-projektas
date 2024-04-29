@@ -16,7 +16,7 @@ const AdminMain = () => {
     const [recommendedMovies, setRecommendedMovies] = useState([])
     const [selectedGenre, setSelectedGenre] = useState('')
     const [selectedYear, setSelectedYear] = useState('')
-    const moviesPerPage = 10
+    const moviesPerPage = 12
 
     useEffect(() => {
         const fetchMovies = async () => {
