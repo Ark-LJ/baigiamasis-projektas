@@ -1,7 +1,6 @@
 import fb from "../components/images/fb.png"
 import insta from "../components/images/insta.png"
 import eX from "../components/images/eX.png"
-import logo from "../components/images/logo.png"
 
 const Footer = () => {
     return (
@@ -20,8 +19,6 @@ const Footer = () => {
                     <div>
                         <p className="address">Email Address:</p>
                         <p>Movie.time@gmail.com</p>
-                    </div>
-                    <div className="logo-2"><img src={logo} alt="logo"/>
                     </div>
                 </div>
                 <div className="location">

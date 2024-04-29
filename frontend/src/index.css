@@ -1,44 +1,19 @@
-* {
-    color: #FFF;
-}
-
-/* Modal error in order(duplicate movie) */
-.modal-error {
+/* Loading Cage styling. blur-content class styling is for blurring out the page while the page is "loading" */
+.loading-gif {
     position: absolute;
-    top: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(255, 0, 0, 0.386);
-    padding: 10px 20px;
-    border-radius: 5px;
-    animation: slideInOut 2s ease-in-out;
+    z-index: 99;
+    left: 50%; 
+    bottom: 50%;
 }
-
-/* Bluring out when the movie is clicked and the modal comes in front */
 .blur-content {
     filter: blur(1.5rem);
 }
-
-@keyframes slideInOut {
-    0% {
-        transform: translate(-50%, -100%);
-    }
-    10% {
-        transform: translate(-50%, 0);
-    }
-    90% {
-        transform: translate(-50%, 0);
-    }
-    100% {
-        transform: translate(-50%, -100%);
-    }
-}
+/*  */
 
 /* Moodal */
 .modal {
     position: fixed;
-    top: 10%;
-    left: 10%;
+    top: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,36 +21,257 @@
 
 .contents-container {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .modal-content {
     background-color: #06001B;
     color: #78F7FA;
+    border: 4px solid #78F7FA;
     padding: 20px;
-    /* max-width: 600px; */
-    width: 60%;
-    border: 1px solid #78F7FA;
-    /* max-height: 400px; */
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    flex-direction: row;
+    width: 80%;
+    border-radius: 30px;  
+}
+
+.modal-content-admin{
+    background-color: #78F7FA;
+    border: 4px solid #78F7FA;
+    padding: 20px;
+    width: 80%;
+    border-radius: 30px;  
+}
+
+.form-info3{
+border-radius: 50px;
+border: 4px solid #06001B;
+color: #06001B;
+background-color: #78F7FA;
+font-family: 'Cambay';
+font-size: 15px;
+padding: 5px 10px;
+}
+
+.form-title3{
+  margin: 0;
+}
+
+.form-evrything {
+ width: 200px;
+
+}
+
+.modal-top{ 
+    display:flex; 
+    align-items: center;
+    padding: 0 20px;  
+}
+
+.edit-form-container{
+   display: flex;
+   justify-content: center;
+   margin: 20px; 
+   font-family: 'Bungee';
+   color: #06001B;
+   background-color: #78F7FA;
+   border-radius: 30px;
+   width: 550px;
+   
+}
+
+.edit-all-container{
     display: flex;
+    justify-content: center;
+}
+
+.form-title{
+    margin:3px;
+    margin-left:15px;
+    margin-top: 10px;
+}
+
+.form-info{ 
+    border:4px solid #78F7FA;
+    border-radius: 50px;
+    padding:12px;
+    margin:5px;
+    background-color: transparent;
+    font-family: 'Bungee';
+    font-weight: 200;
+    font-size: 15px;
+    color:#FFFFFF;
+}
+
+.form-info2{ 
+    border:4px solid #78F7FA;
+    border-radius: 50px;
+    padding:12px;
+    margin:5px;
+    background-color: transparent;
+    font-family: 'Bungee';
+    font-weight: 200;
+    font-size: 15px;
+    color:#FFFFFF;  
+    width: fit-content;
+    width: 200px;
+}
+
+
+.form-info3{
+    border:4px solid #06001B;
+    border-radius: 50px;
+    padding:12px;
+    margin:5px;
+    background-color: transparent;
+    font-family: 'Bungee';
+    font-weight: 200;
+    font-size: 15px;
+    color: #06001B;
+    padding: 20px;
+}
+
+
+.form-info4{
+    border:4px solid #06001B;
+    border-radius: 50px;
+    padding:12px;
+    margin:5px;
+    background-color: transparent;
+    font-family: 'Cambay';
+    font-weight: 200;
+    font-size: 15px;
+    color:#fff;
+    padding: 20px;
+}
+
+
+
+.info-story{
+    border-radius: 20px;
+    padding:17px ;
+    
+}
+.form-button{ 
+    border:4px solid #78F7FA;
+    border-radius: 50px;
+    padding:0px 30px;
+    line-height: 30px;
+    background-color: transparent;
+    font-family: 'Bungee';
+    font-weight: 200;
+    font-size: 15px;
+    color:#78F7FA;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.text-container{
+padding: 0 20px;
+font-family: 'Bungee';
+font-weight: 200;
+font-size: 15px;
+color: #78F7FA;
+line-height: 15px;
+}
+
+
+/* admin form*/
+.flex-admin{
+   margin-left: 90px;
+}
+
+
+.text-container-admin{
+padding: 0 20px;
+font-family: 'Bungee';
+font-weight: 200;
+font-size: 15px;
+color:#06001B;
+line-height: 15px;
+}
+
+
+.edit-content {
+    width: 800px;
+}
+
+.edit-container{
+    display: flex;
+    flex-direction: column;
+    width: 650px;
+}
+
+.text-container-title {
+    padding: 0 20px;
+    font-family: 'Bungee';
+    font-weight: 200;
+    font-size: 30px;
+    color:#06001B;
+    line-height: 15px;
+}
+
+
+.movie-container{
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+ 
 }
 
 .modal-content img {
+    border-radius: 20px;;
     width: 200px;
     height: 300px;
 }
+.form-info-admin{ 
+    border:4px solid #06001B;
+    border-radius: 50px;
+    padding:5px 10px;
+    margin:5px;
+    background-color: #78F7FA;
+    font-family: 'Bungee';
+    font-weight: 200;
+    font-size: 15px;
+    color:#06001B; 
+    width: 200px;
+}
+
+
+
+.form-info-admin2{ 
+    width:95%
+}
+
+.admin-wrap{
+    display: flex;
+    flex-wrap: wrap;
+
+}
 
 .close {
-    /* position: absolute; */
-    top: 10px;
-    right: 10px;
+    
     cursor: pointer;
     font-size: 24px;
 }
 
+
+.edit-form-btn {
+    border: 4px solid #78F7FA;
+    border-radius: 40px;
+    padding: 10px 20px;
+    line-height: 30px;
+    background-color:#06001B;
+    font-family: 'Bungee';
+    font-weight: 200;
+    font-size: 30px;
+    color:#78F7FA;
+    margin: 15px;
+    
+
+
+
+
+}
 
 .footer-container {
     display: flex;
@@ -84,14 +280,7 @@
     margin: 0 40px 0 40px;
 }
 
-.socials {
-    display: flex;
-    flex-direction: column;
-    border-radius: 5px;
-    border: 2px solid blueviolet;
-    gap: 20px;
-    height: fit-content;
-}
+
 
 
 /* sign up and login*/
@@ -100,6 +289,7 @@
 .login_div{
     
     background-image: url("./components/images/loginbg.png");
+    
     background-repeat:no-repeat;
     background-size: cover;
     height:100vh;
@@ -110,7 +300,7 @@
     padding: 0;
 }
 .kasete{
-    background-image: url("./components/images/kasete-galutinis1.png");
+    background-image: url("./components/images/1190.png");
     background-repeat: no-repeat;
     width: 1200px;
     height: 650px;
@@ -121,23 +311,24 @@
 }
 
 .login_label{
-    margin:60px;
+      margin:20px;
       font-family: "JetBrains Mono";
       font-size: 15px;
       font-weight: 500;
+      
       
     
 }
 .login_email{
     position:absolute;
-    top: 220px;
-    left: 350px;
+    top: 280px;
+    left: 420px;
     
 }
 .login_password{
     position:absolute;
-    top: 290px;
-    left: 350px;
+    top: 340px;
+    left: 420px;
 
 }
 .button{
@@ -162,8 +353,8 @@ font-size: 40px;
 }
 .signup_navig{
     position: absolute;
-    top:100px;
-    right:60px;
+    top:115px;
+    right:80px;
 }
 
 .l_label{
@@ -174,25 +365,43 @@ font-size: 40px;
     font-size: 20px;
 }
 
-
-
+.modal-general{
+    background-color: #06001B;
+    color: #78F7FA;
+    border: 4px solid #78F7FA;
+    padding: 20px;
+    width: 0%;
+    border-radius: 30px;  
+}
 
 .error_warning{
     position: absolute;
-    top:90px;
+    top:130px;
     left:80px;
-    font-family: "JetBrains Mono";
+    font-family:Arial, Helvetica, sans-serif;
     font-size: 20px;
     font-weight: 500;
     color:#fff;
     width: 900px;
-      
-
 }
+
+@media all and (max-with: 1440px) {
+   
+    .form-info2{ 
+        padding:5px;
+        margin:5px;
+        width: 200px;
+        font-size: 5px;
+    
+    }
+}
+    
+
+
 @media all and (max-width: 1410px) {
 
     .kasete{
-        background-image: url("./components/images/kasete-galutinis600.png");
+        background-image: url("./components/images/600.png");
         width: 600px;
         height: 330px;
         position:relative;
@@ -201,13 +410,13 @@ font-size: 40px;
     
     .login_email{
         position:absolute;
-        top: 75px;
-        left: 150px;    
+        top: 125px;
+        left: 200px;    
     }
     .login_password{
         position:absolute;
-        top: 115px;
-        left: 150px;
+        top: 160px;
+        left: 200px;
     }
     .button{
     border-radius: 35px;
@@ -222,7 +431,7 @@ font-size: 40px;
     }
     .signup_navig{
         position: absolute;
-        top:48px;
+        top:57px;
         right:30px;
     }
     
@@ -233,14 +442,77 @@ font-size: 40px;
     
     .error_warning{
         position: absolute;
-        top:35px;
+        top:65px;
         left:40px;
         font-size: 15px;
         width: 500px;
     }
 }
 
+@media all and (max-width: 1100px) {
+    .modal{
+        width: 100%;
+        left: 10px;
+        top: 10px;
+    }
+    
+    .dispay-cast{
+       display: none; 
+    }
+    
+    .form-info {
+        width: auto;
+    }
+
+    .info-story, .form-title {
+        display: none;
+    }
+
+    .modal-name {
+        line-height: 20px;
+    }
+
+    .modal-top{
+       flex-wrap: wrap;
+       justify-content: center;
+      
+    }
+
+    .modal-content {
+        width: 300px;
+    }
+
+    .edit-content {
+        width: 300px;
+    }
+    
+    .display-year {
+        display: none;
+    }
+    
+
+}
+
+
 @media all and (max-width: 610px) {
+    .modal {
+        top: 10px;
+    }
+
+    .modal-top{
+       flex-wrap: wrap;
+       justify-content: center;
+    }
+    .text-container{
+        display: flex;
+        justify-content: center;
+        flex-wrap:wrap;
+    }
+
+    .form-img {
+        display: none;
+    }
+
     .sign{
         display: block;
         color: #fff;
@@ -302,6 +574,7 @@ font-size: 40px;
     .login_navig{
         position: static;
         
+        
     }
     .login_form{
         display: flex;
@@ -315,9 +588,7 @@ font-size: 40px;
         right:10px;
      
     }
-    .login_label{
-        margin:10px 0;
-    }
+    
     
     .l_label{
         font-size: 15px;
@@ -353,7 +624,7 @@ font-size: 40px;
 }
 .error_btn{
  
- border: none;
+ border: 2px solid rgb(255, 255, 255);
 border-radius: 35px;
 line-height: 29px;
 padding: 10px 20px;
@@ -372,8 +643,8 @@ font-size: 40px;
 @media all and (max-width:800px){
     .error_img{
         background-image: url(./components/images/404_300.jpg);
-        width: 300px;
-        height: 300px;
+        width: auto;
+        height: 100vh;
     }
 
     .error_btn{
@@ -384,6 +655,9 @@ font-size: 40px;
        }
 
 }
+
+/* modal*/
+
 
 /* complete*/
 
@@ -408,7 +682,6 @@ font-size: 40px;
 
 .complete_text{
     font-family: 'Bungee';
-    
     width:480px;
     
 }
@@ -431,16 +704,19 @@ font-size: 40px;
     color: #FFFFFF;
     line-height: 20px;
 }
+   
     @media screen and (max-width:860px) {
+
         .complete_img{
             flex-wrap: wrap;
            
             
         }
-       .popcorn{background-image:url(./components/images/popcorn200.png);
-                width: 200px;
-            height: 330px;
-            margin: 10px;}
+       .popcorn{
+        background-image:url(./components/images/popcorn200.png);
+        width: 200px;
+        height: 330px;
+        margin: 10px;}
             
 
         .complete_text{width: 300px;}
@@ -452,7 +728,20 @@ font-size: 40px;
        .complete_p{
             width:300px;
         }
+        .signup{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .l_label{color:#FFFFFF}
+    }
+    @media screen and (max-width:500px) {
+        .search-container{
+            margin:0;
+            justify-content: center;
 
-
-
+        }
+        .footer-container{
+            margin:30px;
+        }
     }

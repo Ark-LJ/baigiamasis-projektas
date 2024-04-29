@@ -6,7 +6,7 @@ const MovieList = ({ handleEdit }) => {
     const [selectedMovie, setSelectedMovie] = useState(null)
     const [searchTerm, setSearchTerm] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
-    const moviesPerPage = 12
+    const moviesPerPage = 10
 
     useEffect(() => {
         const fetchMovies = async () => {
@@ -52,36 +52,41 @@ const MovieList = ({ handleEdit }) => {
     }
 
     return (
-        <div>
-            <h3>Drafts List</h3>
+        <div >
+            <div className='all-btn-admin'>
+            <h3 className='get-movies2'>Drafts List</h3>
             <input
+                className='get-search2 '
                 type="text"
                 placeholder="Search movies..."
                 value={searchTerm}
                 onChange={handleSearch}
             />
-            <ul>
+            </div>
+            <ul className='draft-all'>
                 {currentMovies.map((movie) => (
-                    <li key={movie._id} onClick={() => handleSelectMovie(movie)}>
-                        <img src={movie.url} alt="Cover" style={{ width: '200px', height: '300px', objectFit: 'cover' }} />
-                        <h3>{movie.title} {movie.release_year}</h3>
-                        <p>Status: {movie.status}</p>
+                    <li className='draft-list' key={movie._id} onClick={() => handleSelectMovie(movie)}>
+                        <img className="draft-img" src={movie.url} alt="Cover" />
+                        <h3 className='draft-title'>{movie.title} {movie.release_year}</h3>
+                        <p className='draft-title2'>Status: {movie.status}</p>
                     </li>
                 ))}
             </ul>
-            <div>
-                <button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
-                <button onClick={handleNextPage} disabled={currentPage === totalPages}>Next</button>
+            <div className='draft-flex'>
+                <button className='draft-button' onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
+                <button className='draft-button' onClick={handleNextPage} disabled={currentPage === totalPages}>Next</button>
             </div>
             {selectedMovie && (
-                <div>
-                    <img src={selectedMovie.url} alt="Viršelis" style={{ width: '200px', height: '300px', objectFit: 'cover' }} />
-                    <h3>{selectedMovie.title}</h3>
-                    <p>Release year: {selectedMovie.release_year}</p>
-                    <p>Director: {selectedMovie.director}</p>
-                    <p>{selectedMovie.description}</p>
-                    <button onClick={() => handleEdit(selectedMovie)}>Edit</button>
-                    <button onClick={handleCloseDetails}>Back</button>
+                <div className='draft-list2'>
+                    <div className='draft-list draft-width'>
+                        <img className="draft-img" src={selectedMovie.url} alt="Viršelis" />
+                        <h3 className='draft-title' >{selectedMovie.title}</h3>
+                        <p className='draft-title2'>Release year: {selectedMovie.release_year}</p>
+                        <p className='draft-title2'>Director: {selectedMovie.director}</p>
+                        <p className='draft-title2'>{selectedMovie.description}</p>
+                        <button className='draft-button' onClick={() => handleEdit(selectedMovie)}>Edit</button>
+                        <button className='draft-button' onClick={handleCloseDetails}>Back</button>
+                    </div>
                 </div>
             )}
         </div>

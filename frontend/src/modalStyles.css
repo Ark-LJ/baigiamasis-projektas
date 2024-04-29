@@ -1,0 +1,36 @@
+.admin-modal {
+    width: 80%;
+    left: 10%;
+    top: 40px;
+}
+
+.admin-modal-content {
+    width: 100%;
+}
+
+.admin-form-img {
+    margin-right: 20px;
+}
+
+.admin-text-container {
+    width: 100%;
+}
+
+.admin-form-info {
+    border-radius: 20px;
+}
+
+.admin-button-container {
+    display: flex;
+    gap: 20px;
+}
+
+.admin-edit-content {
+    width: 100%;
+}
+
+.admin-edit-container {
+    width: 100%;
+}
+
+

@@ -64,113 +64,229 @@ const AddMovieForm = ({ onSubmit }) => {
     }
 
     return (
+        // <div>
+        //     <h3>Add New Movie</h3>
+        //     <form onSubmit={handleSubmit}>
+        //         <div>
+        //             <label>Title:</label>
+        //             <input
+        //                 type="text"
+        //                 name="title"
+        //                 value={formData.title}
+        //                 onChange={handleChange}
+        //                 required
+        //             />
+        //         </div>
+        //         <div>
+        //             <label>Description:</label>
+        //             <textarea
+        //                 name="description"
+        //                 value={formData.description}
+        //                 onChange={handleChange}
+        //                 required
+        //             />
+        //         </div>
+        //         <div>
+        //             <label>Director:</label>
+        //             <input
+        //                 type="text"
+        //                 name="director"
+        //                 value={formData.director}
+        //                 onChange={handleChange}
+        //                 required
+        //             />
+        //         </div>
+        //         <div>
+        //             <label>Release Year:</label>
+        //             <input
+        //                 type="number"
+        //                 name="release_year"
+        //                 value={formData.release_year}
+        //                 onChange={handleChange}
+        //                 required
+        //             />
+        //         </div>
+        //         <div>
+        //             <label>Genres:</label>
+        //             <input
+        //                 type="text"
+        //                 name="genres"
+        //                 value={formData.genres}
+        //                 onChange={handleChange}
+        //                 required
+        //             />
+        //         </div>
+        //         <div>
+        //             <label>imdb:</label>
+        //             <input
+        //                 type="number"
+        //                 name="imdb_rating"
+        //                 value={formData.imdb_rating}
+        //                 onChange={handleChange}
+        //                 required
+        //             />
+        //         </div>
+        //         <div>
+        //             <label>Cast:</label>
+        //             <input
+        //                 type="text"
+        //                 name="cast"
+        //                 value={formData.cast}
+        //                 onChange={handleChange}
+        //                 required
+        //             />
+        //         </div>
+        //         <div>
+        //             <label>URL:</label>
+        //             <input
+        //                 type="text"
+        //                 name="url"
+        //                 value={formData.url}
+        //                 onChange={handleChange}
+        //                 required
+        //             />
+        //         </div>
+        //         <div>
+        //             <label>Status:</label>
+        //             <select
+        //                 name="status"
+        //                 value={formData.status}
+        //                 onChange={handleStatusChange}
+        //                 required
+        //             >
+        //                 <option value="draft">Draft</option>
+        //                 <option value="published">Published</option>
+        //             </select>
+        //         </div>
         <div>
-            <h3>Add New Movie</h3>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Title:</label>
-                    <input
-                        type="text"
-                        name="title"
-                        value={formData.title}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Description:</label>
-                    <textarea
+        <div>
+        <h2 className='bannernew'>ADMIN DASHBOARD</h2>
+   <div className='flex-admin'>
+   <div className='modal-content-admin '>
+        <p className="text-container-title">Add New Movie</p>
+       <form className="text-container-admin" onSubmit={handleSubmit}>
+       
+           
+        
+           <div className='form-title-all' >
+               <p className="form-title">Title:</p>
+               <input 
+                   className="form-info-admin form-info-admin2"
+                   type="text"
+                   name="title"
+                   value={formData.title}
+                   onChange={handleChange}
+                   required
+               />
+               </div >
+                   <div className='admin-wrap'>
+                           <div className='form-title-all'>
+                           <p className="form-title">Year:</p>
+                           <input
+                               className="form-info-admin"
+                               type="number"
+                               name="release_year"
+                               value={formData.release_year}
+                               onChange={handleChange}
+                               required
+                           />
+                       </div>
+
+                           <div className='form-title-all'>
+                               <p className="form-title"label>Genres:</p>
+                               <input
+                                   className="form-info-admin "
+                                   type="text"
+                                   name="genres"
+                                   value={formData.genres}
+                                   onChange={handleChange}
+                                   required
+                               />
+                           </div>
+               <div className='form-title-all'>
+                   <p className="form-title">Directed by</p>
+                   <input
+                       className="form-info-admin "
+                       type="text"
+                       name="director"
+                       value={formData.director}
+                       onChange={handleChange}
+                       required
+                   />
+                   </div>
+               <div className='form-title-all'>
+                   <p className="form-title">imdb:</p>
+                   <input
+                       className="form-info-admin "
+                       type="number"
+                       name="imdb_rating"
+                       value={formData.imdb_rating}
+                       onChange={handleChange}
+                       required
+                   />
+               </div>
+               <div className='form-title-all'>
+               <p className="form-title">Status:</p>
+               <select
+                   className="form-info-admin form-info-admin2"
+                   name="status"
+                   value={formData.status}
+                   onChange={handleChange}
+                   required
+               >
+                   <option className="form-info" value="draft">Draft</option>
+                   <option className="form-info" value="published">Published</option>
+               </select>
+           </div>
+           </div>
+           <div className='form-title-all'>
+               <p className="form-title">Cast:</p>
+               <input
+                   className="form-info-admin form-info-admin2"
+                   type="text"
+                   name="cast"
+                   value={formData.cast}
+                   onChange={handleChange}
+                   required
+               />
+           </div>
+           <div className='form-title-all'>
+               <p className="form-title">URL:</p>
+               <input
+                   className="form-info-admin form-info-admin2"
+                   type="text"
+                   name="url"
+                   value={formData.url}
+                   onChange={handleChange}
+                   required
+               />
+           </div>
+           <div className='form-title-all'>
+                    <p className="form-title">Description:</p>
+                    <textarea 
+                        className="form-info-admin form-info-admin2"
                         name="description"
                         value={formData.description}
                         onChange={handleChange}
                         required
                     />
                 </div>
-                <div>
-                    <label>Director:</label>
-                    <input
-                        type="text"
-                        name="director"
-                        value={formData.director}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Release Year:</label>
-                    <input
-                        type="number"
-                        name="release_year"
-                        value={formData.release_year}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Genres:</label>
-                    <input
-                        type="text"
-                        name="genres"
-                        value={formData.genres}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>imdb:</label>
-                    <input
-                        type="number"
-                        name="imdb_rating"
-                        value={formData.imdb_rating}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Cast:</label>
-                    <input
-                        type="text"
-                        name="cast"
-                        value={formData.cast}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>URL:</label>
-                    <input
-                        type="text"
-                        name="url"
-                        value={formData.url}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Status:</label>
-                    <select
-                        name="status"
-                        value={formData.status}
-                        onChange={handleStatusChange}
-                        required
-                    >
-                        <option value="draft">Draft</option>
-                        <option value="published">Published</option>
-                    </select>
-                </div>
                 {confirmDialog ? (
                     <div>
                         <p>Are you sure you want to publish the movie?</p>
-                        <button type="button" onClick={handleConfirmStatusChange}>Yes</button>
-                        <button type="button" onClick={handleCancelStatusChange}>No</button>
+                        <button  className='admin-submit' type="button" onClick={handleConfirmStatusChange}>Yes</button>
+                        <button className='admin-submit' type="button" onClick={handleCancelStatusChange}>No</button>
                     </div>
                 ) : (
                     <div>
-                        <button type="submit" onClick={handleStatusChange}>Add Movie</button>
+                        <button className='admin-submit' type="submit" onClick={handleStatusChange}>Add Movie</button>
                     </div>   
                 )}
             </form>
         </div>
+     </div>
+    </div>
+   </div>
     )
 }
 

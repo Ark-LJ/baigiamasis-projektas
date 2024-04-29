@@ -9,10 +9,10 @@ describe('Admin Testing', () => {
 
     
     it('Tikrinama, ar administratoriui atvaizduojamas "admin dashboard" migtukas', () => {
-        cy.get('.admindashboard').should('be.visible');
+        cy.get('.adminBtn').should('be.visible');
     })
     it('Tikrinama, ar administratorius gali sukurti nauja filma', () => {
-        cy.get('.admindashboard').should('be.visible').click()
+        cy.get('.adminBtn').should('be.visible').click()
         cy.url().should('include', '/admindashboard'); 
         cy.get('input[name="title"]').should('be.visible').type('TEST')
         cy.get('textarea[name="description"]').should('be.visible').type('TEST')
@@ -40,7 +40,7 @@ describe('Admin Testing', () => {
         cy.get('.movies-list .movie-item').first().click();
         cy.get('.modal').should('be.visible');
 
-        cy.contains('button.close','DELETE').should('be.visible').click()
+        cy.contains('button.form-button','DELETE').should('be.visible').click()
         // cy.contains('button.close','DELETE').click()
         cy.wait('@movieDelete').its('response.statusCode').should('eq', 200);
     })
@@ -52,25 +52,25 @@ describe('Admin Testing', () => {
         cy.get('div[class="movies-list"]').should('not.be.empty');
         cy.get('.movies-list .movie-item').first().click();
         cy.get('.modal').should('be.visible');
-        cy.contains('button.close','EDIT').should('be.visible').click()
+        cy.contains('button.form-button','EDIT').should('be.visible').click()
         cy.get('input[name="director"]').should('be.visible').clear().type('TEST')
         cy.get('input[name="url"]').should('be.visible').clear().type('https://i1.wp.com/hechingerreport.org/wp-content/uploads/2018/04/Jennifer-Heller-Buckley-PHOTO1.jpg?ssl=1')
         cy.get('input[name="imdb_rating"]').should('exist')
         cy.get('input[name="release_year"]').should('be.visible')
         cy.get('input[name="genres"]').should('be.visible').clear().type('TEST')
         cy.get('input[name="cast"]').should('be.visible')
-        cy.get('.close').should('exist').contains('button.close','Submit').click()
+        cy.contains('button.form-button','Submit').should('be.visible').click()
         // cy.wait('@editMovieRequest').its('response.statusCode').should('eq', 200);
     })
 
     it('Tikrinama, ar administratorius gali ieiti i admin dashboard', () => {
-           cy.get('.admindashboard').should('be.visible').click()
+           cy.get('.adminBtn').should('be.visible').click()
            cy.url().should('include', '/admindashboard'); 
     })
 
 
         it('Tikrinama, ar administratorius gali koreguoti filmo draft', () => {
-           cy.get('.admindashboard').should('be.visible').click()
+           cy.get('.adminBtn').should('be.visible').click()
            cy.url().should('include', '/admindashboard'); 
            cy.get('div ul li img').first().click();
            cy.get('button').contains('Edit').click()
@@ -95,7 +95,7 @@ describe('Admin Testing', () => {
       })
 
             it('Tikrinama, ar administratorius gali koreguoti rezervacijos statusa', () => {
-           cy.get('.admindashboard').should('be.visible').click()
+           cy.get('.adminBtn').should('be.visible').click()
            cy.url().should('include', '/admindashboard'); 
            cy.intercept('GET', '/api/reservation/admin').as('getReservationsRequest');
            cy.wait('@getReservationsRequest').its('response.statusCode').should('eq', 304);

@@ -21,10 +21,9 @@ const Login = () => {
     return (
         <div className="login_div">
             <div className="kasete">
-                <form className="login" onSubmit={handleSubmit}>
+                <form className="signup" onSubmit={handleSubmit}>
                     <h2 className="sign">LOGIN</h2>
                     <div className="login_label login_email">
-                            <label htmlFor="email">E-mail:</label>
                             <input
                                 className="l_label"
                                 type="email"
@@ -34,7 +33,6 @@ const Login = () => {
                             />
                     </div>
                     <div className="login_label  login_password">
-                        <label htmlFor="password">Password:</label>
                         <input
                             className="l_label"
                             type="password"
